@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - GigBounty</title>
     <style>
         /* Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
         /* App Variables */
         :root {
             --slate-950: #0F172A;
@@ -20,33 +22,27 @@
             --indigo-500: #6366F1;
             --amber-500: #F59E0B;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.7;
             color: var(--slate-300);
             background-color: var(--slate-950);
             margin: 0;
             padding: 20px;
-            background-color: #f9f9f9;
             overflow-x: hidden;
         }
+
         .container {
-            background-color: #fff;
             max-width: 800px;
             margin: 40px auto;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             background-color: var(--slate-900);
             border-radius: 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid var(--slate-800);
         }
+
         /* Header Styles */
         .header-banner {
             display: flex;
@@ -57,5 +53,239 @@
             margin-bottom: 30px;
             border: 1px solid var(--slate-800);
         }
+
         .header-icon {
             font-size: 32px;
+            margin-right: 20px;
+        }
+
+        h1 {
+            color: var(--white);
+            margin: 0 0 5px 0;
+            font-weight: 800;
+            font-size: 28px;
+        }
+
+        .date {
+            color: var(--slate-400);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Section Styles */
+        h2 {
+            color: var(--emerald-400);
+            font-size: 20px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        p, ul {
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--pink-500);
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--slate-800);
+            margin: 25px 0;
+            width: 100%;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            margin-top: 30px;
+        }
+
+        .contact-box p {
+            margin: 0 0 10px 0;
+        }
+        
+        .contact-box p:last-child {
+            margin: 0;
+        }
+
+        a {
+            color: var(--amber-500);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--emerald-400);
+        }
+
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger delays for list items */
+        li.fade-in-up {
+            transition-duration: 0.5s;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in-up">
+        
+        <div class="header-banner fade-in-up">
+            <div class="header-icon">🛡️</div>
+            <div>
+                <h1>GigBounty Privacy Policy</h1>
+                <div class="date">Last Updated: August 29, 2026</div>
+            </div>
+        </div>
+
+        <p class="fade-in-up">We are committed to protecting your privacy and ensuring your data is secure. To comply with Google Play Store policies and international data protection laws, please read our comprehensive privacy terms below.</p>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">1. Information We Collect</h2>
+        <ul>
+            <li class="fade-in-up"><strong>Account Information:</strong> When you sign in using Google, we collect your Email Address, Display Name, and Profile Photo to create and manage your account.</li>
+            <li class="fade-in-up"><strong>Financial & Reward Data:</strong> We collect your UPI ID or wallet details purely to process withdrawal requests. We do not process direct bank payments or store credit card information.</li>
+            <li class="fade-in-up"><strong>Gameplay Data:</strong> We track your in-app currency (Coins, Pink Diamonds), task completions, and Leaderboard rankings.</li>
+            <li class="fade-in-up"><strong>Device & Technical Data:</strong> We collect device model, OS version, IP address, and crash logs to maintain app stability and prevent fraud.</li>
+        </ul>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">2. How We Use Your Information</h2>
+        <ul>
+            <li class="fade-in-up">To provide, operate, and maintain the GigBounty platform.</li>
+            <li class="fade-in-up">To securely process your reward payouts and withdrawals.</li>
+            <li class="fade-in-up">To display public Leaderboards (only showing your Display Name and Avatar).</li>
+            <li class="fade-in-up">To analyze app usage and improve features, as well as detecting and preventing fraudulent activities.</li>
+        </ul>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">3. Third-Party Services</h2>
+        <p class="fade-in-up">We use trusted third-party services that may collect information used to identify you. These include:</p>
+        <ul>
+            <li class="fade-in-up">Google Play Services</li>
+            <li class="fade-in-up">Google Analytics for Firebase</li>
+            <li class="fade-in-up">Firebase Authentication</li>
+            <li class="fade-in-up">Firebase Realtime Database & Cloud Firestore</li>
+            <li class="fade-in-up">Firebase Crashlytics</li>
+        </ul>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">4. Account & Data Deletion</h2>
+        <p class="fade-in-up">You have full control over your personal data. We provide a transparent and easy way to delete your data, fully complying with Google Play's Data Deletion requirements.</p>
+        <ul>
+            <li class="fade-in-up"><strong>In-App Deletion:</strong> You can delete your account at any time by navigating to the Profile Screen and tapping the "Delete Account" button.</li>
+            <li class="fade-in-up"><strong>Data Erasure:</strong> Upon requesting deletion, your account, email, profile data, earnings, and transaction history will be permanently and irreversibly erased from our active servers.</li>
+            <li class="fade-in-up"><strong>Web Deletion Request:</strong> You can also request data deletion by contacting our support email directly.</li>
+        </ul>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">5. Children's Privacy</h2>
+        <p class="fade-in-up">Our Services are strictly not intended for anyone under the age of 13. We do not knowingly collect personal identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers.</p>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">6. Security of Your Data</h2>
+        <p class="fade-in-up">We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. However, remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
+
+        <div class="divider fade-in-up"></div>
+
+        <h2 class="fade-in-up">7. Contact Us</h2>
+        <div class="contact-box fade-in-up">
+            <p>If you have any questions, concerns, or require assistance with data deletion, please contact our support team at:</p>
+            <p><strong>Email:</strong> <a href="mailto:support@gigbounty.online">support@gigbounty.online</a></p>
+        </div>
+    </div>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Add slight delay for list items to create a staggered effect
+                        if(entry.target.tagName === 'LI') {
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, (index % 5) * 100); 
+                        } else {
+                            entry.target.classList.add('visible');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach((el) => {
+                observer.observe(el);
+            });
+            
+            // Immediately show the first few elements to prevent delay on load
+            setTimeout(() => {
+                const initialElements = document.querySelectorAll('.fade-in-up');
+                for(let i = 0; i < Math.min(5, initialElements.length); i++) {
+                    initialElements[i].classList.add('visible');
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
