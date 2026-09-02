@@ -65,6 +65,17 @@
         a:hover {
             text-decoration: underline;
         }
+        
+        /* Footer Menu Styles */
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid #dadce0;
+            text-align: center;
+        }
+        .footer-links a { color: #3c4043; text-decoration: none; margin: 0 15px; font-size: 18px; }
+        .footer-links a:hover { color: #1a73e8; }
+        .footer-links span { color: #dadce0; font-size: 20px; }
 
         /* Auto Dark Mode for users using Dark Theme */
         @media (prefers-color-scheme: dark) {
@@ -84,6 +95,10 @@
             a {
                 color: #8ab4f8;
             }
+            .footer { border-color: #5f6368; }
+            .footer-links a { color: #e8eaed; }
+            .footer-links span { color: #5f6368; }
+            .footer-links a:hover { color: #8ab4f8; }
         }
     </style>
 </head>
@@ -139,6 +154,19 @@
         <h2>7. Contact Us</h2>
         <p>If you have any questions, concerns, or require assistance with data deletion, please contact our support team at:</p>
         <p>Email: <a href="mailto:support@gigbounty.online">support@gigbounty.online</a></p>
+        
+        <!-- Footer Menu -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="index.html">Privacy Policy</a>
+                <span>|</span>
+                <a href="terms.html">Terms & Conditions</a>
+                <span>|</span>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: #5f6368;">Copyright © 2026 GigBounty. All rights reserved.</p>
+        </div>
+        
     </div>
 </body>
 </html>
