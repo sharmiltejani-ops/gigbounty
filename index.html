@@ -5,174 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - GigBounty</title>
     <style>
-        /* Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-
-        /* App Variables */
-        :root {
-            --slate-950: #0F172A;
-            --slate-900: #1E293B;
-            --slate-800: #334155;
-            --slate-400: #94A3B8;
-            --slate-300: #CBD5E1;
-            --white: #FFFFFF;
-            --emerald-400: #34D399;
-            --emerald-500: #10B981;
-            --pink-500: #EC4899;
-            --indigo-500: #6366F1;
-            --amber-500: #F59E0B;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--slate-300);
-            background-color: var(--slate-950);
+            font-family: 'Roboto', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #3c4043;
+            background-color: #ffffff;
             margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
+            padding: 24px;
         }
 
         .container {
             max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--slate-900);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--slate-800);
-        }
-
-        /* Header Styles */
-        .header-banner {
-            display: flex;
-            align-items: center;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            border: 1px solid var(--slate-800);
-        }
-
-        .header-icon {
-            font-size: 32px;
-            margin-right: 20px;
+            margin: 0 auto;
         }
 
         h1 {
-            color: var(--white);
-            margin: 0 0 5px 0;
-            font-weight: 800;
-            font-size: 28px;
+            color: #202124;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #dadce0;
         }
 
         .date {
-            color: var(--slate-400);
+            color: #5f6368;
             font-size: 14px;
-            font-weight: 600;
+            margin-bottom: 32px;
         }
 
-        /* Section Styles */
         h2 {
-            color: var(--emerald-400);
-            font-size: 20px;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            font-weight: 800;
+            color: #202124;
+            font-size: 24px;
+            font-weight: 400;
+            margin-top: 48px;
+            margin-bottom: 16px;
         }
 
-        p, ul {
+        p {
             font-size: 16px;
+            margin-bottom: 16px;
         }
 
         ul {
-            padding-left: 0;
-            list-style: none;
+            font-size: 16px;
+            padding-left: 24px;
+            margin-bottom: 24px;
         }
 
         li {
-            margin-bottom: 12px;
-            padding-left: 24px;
-            position: relative;
-        }
-
-        li::before {
-            content: "•";
-            color: var(--pink-500);
-            font-weight: bold;
-            font-size: 20px;
-            position: absolute;
-            left: 0;
-            top: -2px;
-        }
-
-        strong {
-            color: var(--white);
-            font-weight: 600;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: var(--slate-800);
-            margin: 25px 0;
-            width: 100%;
-        }
-
-        /* Contact Box */
-        .contact-box {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid rgba(236, 72, 153, 0.3);
-            margin-top: 30px;
-        }
-
-        .contact-box p {
-            margin: 0 0 10px 0;
-        }
-        
-        .contact-box p:last-child {
-            margin: 0;
+            margin-bottom: 8px;
         }
 
         a {
-            color: var(--amber-500);
+            color: #1a73e8;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
         }
 
         a:hover {
-            color: var(--emerald-400);
+            text-decoration: underline;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 24px;
-                margin: 20px auto;
+        /* Auto Dark Mode for users using Dark Theme */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #202124;
+                color: #e8eaed;
+            }
+            h1, h2 {
+                color: #e8eaed;
+            }
+            .date {
+                color: #9aa0a6;
             }
             h1 {
-                font-size: 24px;
+                border-bottom: 1px solid #5f6368;
+            }
+            a {
+                color: #8ab4f8;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        
-        <div class="header-banner">
-            <div class="header-icon">🛡️</div>
-            <div>
-                <h1>GigBounty Privacy Policy</h1>
-                <div class="date">Last Updated: August 29, 2026</div>
-            </div>
-        </div>
+        <h1>GigBounty Privacy Policy</h1>
+        <div class="date">Last Updated: August 29, 2026</div>
 
         <p>We are committed to protecting your privacy and ensuring your data is secure. To comply with Google Play Store policies and international data protection laws, please read our comprehensive privacy terms below.</p>
 
-        <div class="divider"></div>
-
         <h2>1. Information We Collect</h2>
+        <p>We collect information to provide better services to all our users. The information we collect includes:</p>
         <ul>
             <li><strong>Account Information:</strong> When you sign in using Google, we collect your Email Address, Display Name, and Profile Photo to create and manage your account.</li>
             <li><strong>Financial & Reward Data:</strong> We collect your UPI ID or wallet details purely to process withdrawal requests. We do not process direct bank payments or store credit card information.</li>
@@ -180,17 +103,14 @@
             <li><strong>Device & Technical Data:</strong> We collect device model, OS version, IP address, and crash logs to maintain app stability and prevent fraud.</li>
         </ul>
 
-        <div class="divider"></div>
-
         <h2>2. How We Use Your Information</h2>
+        <p>We use the information we collect for the following purposes:</p>
         <ul>
             <li>To provide, operate, and maintain the GigBounty platform.</li>
             <li>To securely process your reward payouts and withdrawals.</li>
             <li>To display public Leaderboards (only showing your Display Name and Avatar).</li>
             <li>To analyze app usage and improve features, as well as detecting and preventing fraudulent activities.</li>
         </ul>
-
-        <div class="divider"></div>
 
         <h2>3. Third-Party Services</h2>
         <p>We use trusted third-party services that may collect information used to identify you. These include:</p>
@@ -202,8 +122,6 @@
             <li>Firebase Crashlytics</li>
         </ul>
 
-        <div class="divider"></div>
-
         <h2>4. Account & Data Deletion</h2>
         <p>You have full control over your personal data. We provide a transparent and easy way to delete your data, fully complying with Google Play's Data Deletion requirements.</p>
         <ul>
@@ -212,23 +130,15 @@
             <li><strong>Web Deletion Request:</strong> You can also request data deletion by contacting our support email directly.</li>
         </ul>
 
-        <div class="divider"></div>
-
         <h2>5. Children's Privacy</h2>
         <p>Our Services are strictly not intended for anyone under the age of 13. We do not knowingly collect personal identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers.</p>
-
-        <div class="divider"></div>
 
         <h2>6. Security of Your Data</h2>
         <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. However, remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
 
-        <div class="divider"></div>
-
         <h2>7. Contact Us</h2>
-        <div class="contact-box">
-            <p>If you have any questions, concerns, or require assistance with data deletion, please contact our support team at:</p>
-            <p><strong>Email:</strong> <a href="mailto:support@gigbounty.online">support@gigbounty.online</a></p>
-        </div>
+        <p>If you have any questions, concerns, or require assistance with data deletion, please contact our support team at:</p>
+        <p>Email: <a href="mailto:support@gigbounty.online">support@gigbounty.online</a></p>
     </div>
 </body>
 </html>
