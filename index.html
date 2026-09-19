@@ -42,7 +42,6 @@
             transform: translateY(-2px);
         }
 
-        .task-card-spin { background: linear-gradient(135deg, #db2777, #9333ea); }
         .task-card-math { background: linear-gradient(135deg, #0ea5e9, #2dd4bf); }
         .task-card-scratch { background: linear-gradient(135deg, #f97316, #f59e0b); }
 
@@ -64,24 +63,6 @@
         
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .marquee-wrapper {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            background: #0B0E17;
-            border-top: 1px solid #1f2937;
-            border-bottom: 1px solid #1f2937;
-            padding: 12px 0;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: scroll 25s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-        }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white relative">
@@ -134,16 +115,13 @@
 
     <!-- 2. Hero Section -->
     <section class="pt-28 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 min-h-[85vh] flex flex-col justify-center items-center text-center relative max-w-5xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gray-800/50 border border-gray-700 text-xs sm:text-sm font-semibold text-pink-400 mb-6 md:mb-8">
-        </div>
-        
         <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-4 md:mb-6">
             Turn Your Free Time Into <br class="hidden sm:block">
             <span class="text-gradient">Real UPI Rewards</span>
         </h1>
         
         <p class="text-gray-400 text-base sm:text-lg md:text-xl mb-8 md:mb-10 max-w-2xl leading-relaxed px-2">
-            Welcome to <b>GigBounty</b>. Complete daily tasks like Math Quizzes, spin the wheel, and scratch cards to earn coins. Convert your coins into direct UPI cash out within 24 hours!
+            Welcome to <b>GigBounty</b>. Complete daily tasks like Math Quizzes and answer simple questions to earn coins. Convert your coins into direct UPI cash out within 24 hours!
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
@@ -166,16 +144,15 @@
                 <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">UPI Transfers</p>
             </div>
             <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">10+</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Daily Cards</p>
+                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">7 Days</h4>
+                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Bonus Streaks</p>
             </div>
             <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">₹500</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Top Reward</p>
+                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">50000</h4>
+                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Top Reward Coins</p>
             </div>
         </div>
     </section>
-
 
     <!-- 3. Play & Earn (Features) -->
     <section id="how-to-earn" class="py-16 md:py-20 px-4 sm:px-6 bg-[#0B0E17]">
@@ -185,14 +162,7 @@
                 <p class="text-gray-400 text-sm md:text-lg px-2">Multiple tasks designed to maximize your daily coin earnings.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                <!-- Spin & Win -->
-                <div class="task-card-spin rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg">
-                    <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Spin & Win</h3>
-                    <p class="text-white/90 text-sm md:text-base font-medium relative z-10">Test your luck and win up to 500 coins instantly!</p>
-                    <i class="fa-solid fa-star absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
-                </div>
-
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
                 <!-- Math Quiz -->
                 <div class="task-card-math rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg">
                     <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Math Quiz</h3>
@@ -200,11 +170,11 @@
                     <i class="fa-solid fa-calculator absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
                 </div>
 
-                <!-- Scratch Card -->
-                <div class="task-card-scratch rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg sm:col-span-2 md:col-span-1">
-                    <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Scratch Card</h3>
-                    <p class="text-white/90 text-sm md:text-base font-medium relative z-10">Scratch 10 daily cards to reveal hidden coin treasures.</p>
-                    <i class="fa-solid fa-gift absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
+                <!-- Answer Questions -->
+                <div class="task-card-scratch rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg">
+                    <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Answer Questions</h3>
+                    <p class="text-white/90 text-sm md:text-base font-medium relative z-10">Complete simple surveys and earn +20 coins per survey.</p>
+                    <i class="fa-solid fa-check-double absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
                 </div>
             </div>
 
@@ -236,16 +206,6 @@
             <div class="w-full lg:w-1/2 text-center lg:text-left">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Simple Wallet, <br class="hidden lg:block"><span class="text-gradient">Fast Withdrawals</span></h2>
                 <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-2 lg:px-0">GigBounty offers the most transparent withdrawal system. No hidden charges. Enter your UPI ID, select the amount, and get paid within 24 hours.</p>
-                
-                <div class="card-bg border border-gray-800 p-4 md:p-6 rounded-2xl mb-6 flex items-center justify-between mx-auto lg:mx-0 max-w-md">
-                    <div class="text-left">
-                        <p class="text-xs md:text-sm text-gray-400 font-semibold mb-1">Starter Exchange</p>
-                        <p class="text-white font-bold text-sm md:text-lg">1k Diamonds <i class="fa-solid fa-arrow-right-arrow-left mx-1 text-gray-500 text-xs"></i> 10k Coins</p>
-                    </div>
-                    <div class="w-10 h-10 md:w-12 md:h-12 bg-pink-500/20 rounded-full flex items-center justify-center text-pink-500 text-lg md:text-xl border border-pink-500/50 flex-shrink-0">
-                        <i class="fa-regular fa-gem"></i>
-                    </div>
-                </div>
             </div>
 
             <!-- Right: Wallet Mockup UI -->
@@ -261,7 +221,7 @@
 
                     <h3 class="font-bold text-base md:text-lg mb-3 md:mb-4 text-white">Cashout Options</h3>
                     
-                    <div class="grid grid-cols-3 gap-2 md:gap-3 mb-5 md:mb-6">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mb-5 md:mb-6">
                         <!-- 10 Rs -->
                         <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
                             <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹10</h4>
@@ -276,6 +236,16 @@
                         <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
                             <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹50</h4>
                             <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">5000 Coins</p>
+                        </div>
+                        <!-- 75 Rs -->
+                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
+                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹75</h4>
+                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">7500 Coins</p>
+                        </div>
+                        <!-- 100 Rs -->
+                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
+                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹100</h4>
+                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">10000 Coins</p>
                         </div>
                     </div>
 
@@ -303,18 +273,18 @@
                     <i class="fa-solid fa-stopwatch"></i> Weekly Ranking Active
                 </div>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Compete & Win <br class="hidden lg:block"><span class="text-gradient">Massive Rewards</span></h2>
-                <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-2 lg:px-0">GigBounty rewards top performers every week. Collect Pink Diamonds by completing tasks and climb the ranks to win real UPI cash and vouchers.</p>
+                <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-2 lg:px-0">GigBounty rewards top performers every week. Collect Pink Diamonds by completing tasks and climb the ranks to win massive coin rewards.</p>
                 
                 <div class="card-bg border border-gray-800 rounded-xl md:rounded-2xl p-5 md:p-6 mb-4 shadow-lg text-left max-w-md mx-auto lg:mx-0">
                     <h3 class="text-lg md:text-xl font-bold text-pink-500 mb-3 md:mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> Top 3 Rewards</h3>
                     <ul class="space-y-3 md:space-y-4">
                         <li class="flex items-center gap-3 md:gap-4">
                             <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-yellow-500/20 text-yellow-500 flex items-center justify-center font-bold text-sm md:text-base">1</div>
-                            <span class="text-white font-semibold text-sm md:text-lg">₹500 UPI Cash</span>
+                            <span class="text-white font-semibold text-sm md:text-lg">50000 Coins</span>
                         </li>
                         <li class="flex items-center gap-3 md:gap-4">
                             <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-400/20 text-gray-300 flex items-center justify-center font-bold text-sm md:text-base">2</div>
-                            <span class="text-white font-semibold text-sm md:text-lg">Amazon Voucher</span>
+                            <span class="text-white font-semibold text-sm md:text-lg">10000 Coins</span>
                         </li>
                         <li class="flex items-center gap-3 md:gap-4">
                             <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-700/30 text-orange-400 flex items-center justify-center font-bold text-sm md:text-base">3</div>
@@ -324,7 +294,7 @@
                 </div>
                 <div class="bg-pink-500/10 border border-pink-500/20 rounded-lg md:rounded-xl p-2.5 md:p-3 text-[10px] md:text-xs text-pink-300 flex items-start gap-2 max-w-md mx-auto lg:mx-0 text-left">
                     <i class="fa-solid fa-circle-info mt-0.5"></i>
-                    <span>Minimum 200 Pink Diamonds required to qualify for weekly rewards.</span>
+                    <span>Minimum 500 Pink Diamonds required to qualify for weekly rewards.</span>
                 </div>
             </div>
 
@@ -349,7 +319,7 @@
                             <i class="fa-solid fa-crown absolute -top-4 left-1/2 -translate-x-1/2 text-yellow-400 text-lg md:text-xl drop-shadow-md"></i>
                             <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sharmil&backgroundColor=ff0000" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-600 border-2 md:border-4 border-yellow-500 mb-1" alt="Rank 1">
                             <p class="text-xs md:text-sm font-bold text-white">Sharmil</p>
-                            <p class="text-[8px] md:text-[10px] text-pink-400 font-bold">0 <i class="fa-solid fa-gem"></i></p>
+                            <p class="text-[8px] md:text-[10px] text-pink-400 font-bold">10 <i class="fa-solid fa-gem"></i></p>
                         </div>
                         <div class="w-20 sm:w-24 md:w-28 h-28 md:h-36 bg-gradient-to-t from-yellow-700 to-yellow-400 rounded-t-lg md:rounded-t-xl flex justify-center pt-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
                             <span class="text-3xl md:text-4xl font-black text-white">1</span>
