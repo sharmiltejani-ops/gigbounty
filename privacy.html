@@ -51,7 +51,7 @@
         <div class="content-card rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl">
             
             <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-2 text-gradient">GigBounty Privacy Policy</h1>
-            <div class="text-gray-400 text-sm mb-8 pb-6 border-b border-gray-800">Last Updated: October 15, 2026</div>
+            <div class="text-gray-400 text-sm mb-8 pb-6 border-b border-gray-800">Last Updated: October 22, 2026</div>
 
             <p class="text-gray-300 text-base mb-6">We are committed to protecting your privacy and ensuring your data is secure. To comply with Google Play Store policies and applicable Indian data protection laws, please read our privacy terms below.</p>
 
@@ -62,7 +62,7 @@
                 <li><strong class="text-white">Financial & Reward Data:</strong> We collect your UPI ID or wallet details purely to process withdrawal requests. We do not process direct bank payments or store credit card information.</li>
                 <li><strong class="text-white">Task & Reward Data:</strong> We track your in-app currency (Coins, Pink Diamonds), task completions, and Leaderboard rankings.</li>
                 <li><strong class="text-white">Device & Technical Data:</strong> We collect device model, OS version, IP address, and crash logs to maintain app stability and prevent fraud.</li>
-                <li><strong class="text-white">Advertising Data:</strong> Google AdMob and our ad mediation partners (including Unity Ads) may collect your Advertising ID (GAID), device identifiers, and usage data to serve personalized or non-personalized reward advertisements within the app. Please refer to Section 5 for full details.</li>
+                <li><strong class="text-white">Advertising Data:</strong> Google AdMob, our advertising partner, may collect your Advertising ID (GAID), device identifiers, and interaction data to serve advertisements (including Rewarded, Interstitial, and Native Ads) within the app. Please refer to Section 5 for full details.</li>
             </ul>
 
             <h2 class="text-xl sm:text-2xl font-bold text-white mt-10 mb-4">2. How We Use Your Information</h2>
@@ -72,7 +72,7 @@
                 <li>To securely process your reward payouts and withdrawals. Withdrawal requests are currently reviewed and processed manually by our team using the UPI ID/wallet details you provide — we do not currently route these transactions through an automated third-party payment gateway.</li>
                 <li>To display public Leaderboards (only showing your Display Name and Avatar).</li>
                 <li>To analyze app usage and improve features, as well as detecting and preventing fraudulent activities.</li>
-                <li>To serve reward-based advertisements through Google AdMob and its mediated networks (such as Unity Ads) that allow you to earn Coins and Pink Diamonds by voluntarily watching ads.</li>
+                <li>To serve advertisements through Google AdMob, including rewarded video ads that allow you to voluntarily earn Coins and Pink Diamonds, interstitial ads during task transitions, and native ads integrated within the app interface.</li>
             </ul>
 
             <h2 class="text-xl sm:text-2xl font-bold text-white mt-10 mb-4">3. Data Sharing and Selling of Information</h2>
@@ -86,23 +86,27 @@
                 <li>Firebase Authentication</li>
                 <li>Firebase Realtime Database &amp; Cloud Firestore</li>
                 <li>Firebase Crashlytics</li>
-                <li>Google AdMob &amp; AdMob Mediation Partners (including Unity Ads)</li>
+                <li>Google AdMob (Advertising)</li>
             </ul>
 
-            <h2 class="text-xl sm:text-2xl font-bold text-white mt-10 mb-4">5. Advertising (Google AdMob & Unity Ads Mediation)</h2>
-            <p class="text-gray-300 text-base mb-4">GigBounty uses <strong class="text-white">Google AdMob</strong> alongside ad network mediation (including <strong class="text-white">Unity Ads</strong>) to display <strong class="text-white">Rewarded Video Advertisements</strong>. These are 100% optional and user-initiated — you choose to watch an ad to earn in-app rewards (Coins or Pink Diamonds). We do not display banner ads or interstitial ads that interrupt your experience.</p>
-            <p class="text-gray-300 text-base mb-4">As part of this advertising and mediation setup, Google AdMob and Unity Ads may collect the following data:</p>
+            <h2 class="text-xl sm:text-2xl font-bold text-white mt-10 mb-4">5. Advertising (Google AdMob)</h2>
+            <p class="text-gray-300 text-base mb-4">GigBounty uses <strong class="text-white">Google AdMob</strong> to display third-party advertisements. We utilize standard, Google-certified ad formats in strict compliance with Google Play Developer policies:</p>
             <ul class="list-disc pl-6 space-y-3 text-gray-300 text-base mb-4">
-                <li><strong class="text-white">Advertising ID (GAID) & Identifiers:</strong> Unique, resettable device identifiers used to serve personalized or non-personalized ads and measure ad performance.</li>
+                <li><strong class="text-white">Rewarded Video Ads:</strong> User-initiated video advertisements that you voluntarily choose to watch to claim in-app rewards (such as Coins or Pink Diamonds).</li>
+                <li><strong class="text-white">Interstitial Ads:</strong> Full-screen advertisements displayed at natural break points or transitions between task questions (accompanied by a transparent countdown and clear close/dismiss buttons), without interrupting active gameplay.</li>
+                <li><strong class="text-white">Native Ads:</strong> Contextual ad cards styled seamlessly to fit the app design within quiz and task screens.</li>
+            </ul>
+            <p class="text-gray-300 text-base mb-4">As part of this integration, Google AdMob may collect and process the following data:</p>
+            <ul class="list-disc pl-6 space-y-3 text-gray-300 text-base mb-4">
+                <li><strong class="text-white">Advertising ID (GAID):</strong> A unique, resettable device identifier used by Google to serve personalized or non-personalized ads.</li>
                 <li><strong class="text-white">Device Information:</strong> Device model, OS version, screen resolution, and language settings.</li>
                 <li><strong class="text-white">IP Address:</strong> Used to determine approximate location for ad targeting and fraud prevention.</li>
                 <li><strong class="text-white">Ad Interaction Data:</strong> Whether you watched, skipped, or clicked an ad, used to measure ad performance.</li>
             </ul>
-            <p class="text-gray-300 text-base mb-4">This data is collected and processed by our advertising partners in accordance with their respective privacy policies:</p>
+            <p class="text-gray-300 text-base mb-4">This data is collected and processed by Google LLC in accordance with their privacy policies:</p>
             <ul class="list-disc pl-6 space-y-2 text-gray-300 text-base mb-4">
                 <li><a href="https://policies.google.com/privacy" class="text-pink-400 hover:underline" target="_blank">Google Privacy Policy</a></li>
                 <li><a href="https://support.google.com/admob/answer/6128543" class="text-pink-400 hover:underline" target="_blank">How Google uses data from AdMob</a></li>
-                <li><a href="https://unity.com/legal/privacy-policy" class="text-pink-400 hover:underline" target="_blank">Unity Privacy Policy</a></li>
             </ul>
             <p class="text-gray-300 text-base mb-4">You can opt out of personalized advertising at any time by:</p>
             <ul class="list-disc pl-6 space-y-3 text-gray-300 text-base mb-6">
@@ -156,8 +160,6 @@
                 <a href="terms.html" class="hover:text-pink-400 transition">Terms &amp; Conditions</a>
                 <span>|</span>
                 <a href="faq.html" class="hover:text-pink-400 transition">FAQ</a>
-                <span>|</span>
-                <a href="delete-account.html" class="hover:text-pink-400 transition">Delete Account</a>
             </div>
             <p class="text-gray-500 text-xs md:text-sm font-semibold">Copyright &copy; 2026 GigBounty. All rights reserved.</p>
         </div>
