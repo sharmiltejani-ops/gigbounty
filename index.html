@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GigBounty - Play, Complete Tasks & Earn Rewards</title>
+    <title>GigBounty - Play, Complete Tasks & Earn Real Rewards</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        appBg: '#080B12',
+                        appDark: '#0B0F19',
+                        appCard: '#111623',
+                        appCardLight: '#1A2133',
+                        appBorder: '#1F2937',
+                        neonPurple: '#A855F7',
+                        neonPink: '#EC4899',
+                        neonGreen: '#22C55E',
+                        coinGold: '#F59E0B',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -15,392 +43,1361 @@
             color: #ffffff;
             overflow-x: hidden;
         }
-        
-        /* Pro-level Background Grid */
+
+        /* Ambient Background Grid */
         .bg-grid {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-size: 50px 50px;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-size: 40px 40px;
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse at 50% 20%, black 60%, transparent 95%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 60%, transparent 95%);
             z-index: -2;
             pointer-events: none;
         }
 
+        /* Glowing Blobs */
+        .ambient-blob-1 {
+            position: absolute; width: 550px; height: 550px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(0,0,0,0) 70%);
+            top: -10%; left: -10%; z-index: -1; pointer-events: none;
+        }
+        .ambient-blob-2 {
+            position: absolute; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.14) 0%, rgba(0,0,0,0) 70%);
+            top: 40%; right: -10%; z-index: -1; pointer-events: none;
+        }
+
+        /* Navigation Glass */
         .nav-glass {
             background: rgba(8, 11, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
-        .card-bg {
+        /* App Card Styles */
+        .app-surface {
             background: #111623;
-            border: 1px solid #1f2937;
+            border: 1px solid #1F2937;
+        }
+        .app-surface-hover:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .text-gradient {
+        /* Text Gradients */
+        .text-gradient-purple {
             background: linear-gradient(135deg, #A855F7, #EC4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
+        /* CTA Button Gradient */
         .btn-gradient {
             background: linear-gradient(135deg, #9333ea, #db2777);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-gradient:hover {
-            box-shadow: 0 0 20px rgba(219, 39, 119, 0.4);
+            box-shadow: 0 0 25px rgba(219, 39, 119, 0.45);
             transform: translateY(-2px);
         }
 
-        .task-card-math { background: linear-gradient(135deg, #0ea5e9, #2dd4bf); }
-        .task-card-scratch { background: linear-gradient(135deg, #f97316, #f59e0b); }
+        /* Phone Simulator Chassis */
+        .phone-mockup {
+            width: 100%;
+            max-width: 380px;
+            height: 720px;
+            background: #0B0F19;
+            border: 10px solid #1E293B;
+            border-radius: 46px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(168, 85, 247, 0.25);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
 
-        .blob-1 {
-            position: absolute; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(147,51,234,0.15) 0%, rgba(0,0,0,0) 70%);
-            top: -5%; left: -10%; z-index: -1;
+        /* Dynamic Island / Camera Notch */
+        .phone-notch {
+            width: 110px;
+            height: 22px;
+            background: #000000;
+            border-radius: 20px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
         }
-        .blob-2 {
-            position: absolute; width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, rgba(0,0,0,0) 70%);
-            bottom: 10%; right: -5%; z-index: -1;
+        .notch-camera {
+            width: 9px;
+            height: 9px;
+            background: #111827;
+            border-radius: 50%;
+            border: 1.5px solid #1f2937;
+        }
+        .notch-sensor {
+            width: 6px;
+            height: 6px;
+            background: #064e3b;
+            border-radius: 50%;
         }
 
-        @media (min-width: 768px) {
-            .blob-1 { width: 600px; height: 600px; top: -10%; }
-            .blob-2 { width: 500px; height: 500px; }
+        /* Interactive App Screen Tabs */
+        .app-screen {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 75px;
+            animation: fadeInScreen 0.25s ease-out;
         }
-        
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .app-screen.active {
+            display: block;
+        }
+
+        @keyframes fadeInScreen {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hide scrollbars inside mockup */
+        .app-screen::-webkit-scrollbar { display: none; }
+        .app-screen { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Mockup Bottom Navigation */
+        .phone-bottom-nav {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 65px;
+            background: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 40;
+            padding-bottom: 6px;
+        }
+        .app-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            color: #64748B;
+            transition: all 0.2s ease;
+            width: 60px;
+            cursor: pointer;
+        }
+        .app-nav-btn.active {
+            color: #A855F7;
+            transform: translateY(-2px);
+        }
+        .app-nav-btn.active i {
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6));
+        }
+
+        /* Marquee Ticker */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: #0B0E17;
+            border-top: 1px solid #1F2937;
+            border-bottom: 1px solid #1F2937;
+            padding: 12px 0;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: tickerScroll 30s linear infinite;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Task Cards */
+        .task-card-math { background: linear-gradient(135deg, #0284c7, #0d9488); }
+        .task-card-questions { background: linear-gradient(135deg, #ea580c, #d97706); }
+        .task-card-word { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
+
+        /* Pulse glow animation */
+        .pulse-badge {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(168, 85, 247, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white relative">
 
-    <!-- Professional Background Grid -->
+    <!-- Ambient Grid & Glows -->
     <div class="bg-grid"></div>
-    <div class="blob-1"></div>
-    <div class="blob-2"></div>
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
 
-    <!-- 1. Header Section -->
+    <!-- 1. Header Navigation -->
     <header class="fixed w-full top-0 z-50 nav-glass transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <!-- Brand Logo & Name -->
-            <a href="#" class="flex items-center gap-3">
-                <img src="logo.png" alt="GigBounty Logo" class="w-9 h-9 md:w-10 md:h-10 rounded-full shadow-lg">
-                <span class="text-lg md:text-2xl font-extrabold tracking-wide">GigBounty</span>
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="GigBounty Logo" class="w-9 h-9 md:w-10 md:h-10 rounded-full shadow-lg border border-pink-500/30 group-hover:scale-105 transition-transform" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=GigBounty'">
+                <div class="flex flex-col">
+                    <span class="text-lg md:text-2xl font-black tracking-wide font-outfit">GigBounty</span>
+                    <span class="text-[9px] uppercase tracking-widest text-pink-400 font-bold -mt-1 hidden sm:block">Rewards App</span>
+                </div>
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm text-gray-300">
                 <a href="#how-to-earn" class="hover:text-white transition">How to Earn</a>
                 <a href="#wallet" class="hover:text-white transition">Withdrawals</a>
                 <a href="#leaderboard" class="hover:text-white transition">Weekly Rankings</a>
+                <a href="#refer" class="hover:text-white transition">Refer &amp; Earn</a>
                 <a href="faq.html" class="hover:text-white transition">FAQ</a>
             </nav>
 
             <!-- Action Button (Desktop) -->
             <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 btn-gradient text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg">
-                <i class="fa-brands fa-google-play"></i>
+                <i class="fa-brands fa-google-play text-base"></i>
                 <span>Download App</span>
             </a>
             
-            <!-- Mobile Menu Icon -->
-            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none p-1">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#111623] border-t border-gray-800 px-4 py-4 absolute w-full shadow-2xl">
-            <nav class="flex flex-col gap-4 font-medium text-gray-300 text-center">
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111623] border-t border-gray-800 px-6 py-5 absolute w-full shadow-2xl">
+            <nav class="flex flex-col gap-4 font-semibold text-gray-300 text-center">
                 <a href="#how-to-earn" class="mobile-link hover:text-white transition py-2 border-b border-gray-800">How to Earn</a>
                 <a href="#wallet" class="mobile-link hover:text-white transition py-2 border-b border-gray-800">Withdrawals</a>
                 <a href="#leaderboard" class="mobile-link hover:text-white transition py-2 border-b border-gray-800">Weekly Rankings</a>
+                <a href="#refer" class="mobile-link hover:text-white transition py-2 border-b border-gray-800">Refer &amp; Earn</a>
                 <a href="faq.html" class="mobile-link hover:text-white transition py-2 border-b border-gray-800">FAQ</a>
                 <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="mobile-link btn-gradient text-white px-6 py-3 rounded-full font-bold text-sm shadow-lg mt-2 flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-google-play"></i> Download App
+                    <i class="fa-brands fa-google-play"></i> Download App on Play Store
                 </a>
             </nav>
         </div>
     </header>
 
-    <!-- 2. Hero Section -->
-    <section class="pt-28 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 min-h-[85vh] flex flex-col justify-center items-center text-center relative max-w-5xl mx-auto">
-        <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-4 md:mb-6">
-            Turn Your Free Time Into <br class="hidden sm:block">
-            <span class="text-gradient">Real UPI Rewards</span>
-        </h1>
-        
-        <p class="text-gray-400 text-base sm:text-lg md:text-xl mb-8 md:mb-10 max-w-2xl leading-relaxed px-2">
-            Welcome to <b>GigBounty</b>. Complete daily tasks like Math Quizzes and answer simple questions to earn coins. Convert your coins into direct UPI cash out within 24 hours!
-        </p>
+    <!-- 2. Hero Section with Live Interactive App Simulator -->
+    <section class="pt-28 md:pt-36 pb-16 md:pb-24 px-4 sm:px-6 min-h-[92vh] flex items-center relative max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+            
+            <!-- Left Hero Pitch -->
+            <div class="lg:col-span-7 text-center lg:text-left">
+                
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs sm:text-sm font-bold text-purple-300 mb-6 pulse-badge">
+                    <i class="fa-solid fa-bolt text-yellow-400"></i>
+                    <span>Official Android App • 100% Free &amp; Verified</span>
+                </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
-            <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="btn-gradient w-full sm:w-auto px-8 py-3.5 md:py-4 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3">
-                <i class="fa-brands fa-google-play text-xl md:text-2xl"></i> Get it on Play Store
-            </a>
-            <a href="#how-to-earn" class="w-full sm:w-auto px-8 py-3.5 md:py-4 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3 border border-gray-600 hover:bg-gray-800 transition">
-                Explore Features
-            </a>
-        </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight font-outfit mb-6">
+                    Turn Your Free Time Into <br>
+                    <span class="text-gradient-purple">Real UPI Rewards</span>
+                </h1>
+                
+                <p class="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-2xl leading-relaxed mx-auto lg:mx-0 font-normal">
+                    Welcome to <strong class="text-white">GigBounty</strong>. Complete daily tasks like Math Quizzes, Word Puzzles, and simple surveys to earn coins. Convert coins directly into <strong class="text-emerald-400">UPI Cash</strong>, <strong class="text-blue-400">Google Play Redeem Codes</strong>, or <strong class="text-amber-400">Amazon Gift Cards</strong> within 24 hours!
+                </p>
 
-        <!-- Trust Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12 md:mt-16 w-full max-w-4xl border-t border-gray-800 pt-8 md:pt-10">
-            <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">₹10</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Min Cashout</p>
+                <!-- Action CTA & Rating -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                    <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="btn-gradient w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3 shadow-xl">
+                        <i class="fa-brands fa-google-play text-xl md:text-2xl"></i>
+                        <span>Get it on Play Store</span>
+                    </a>
+                    
+                    <a href="#how-to-earn" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base md:text-lg flex items-center justify-center gap-3 border border-gray-700 bg-gray-800/40 hover:bg-gray-800 hover:border-gray-600 transition">
+                        Explore Tasks <i class="fa-solid fa-arrow-down text-sm text-pink-400"></i>
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12 pt-8 border-t border-gray-800/80 max-w-xl mx-auto lg:mx-0 text-center sm:text-left">
+                    <div class="p-2">
+                        <h4 class="text-2xl md:text-3xl font-black text-white font-outfit">₹10</h4>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">Min Cashout</p>
+                    </div>
+                    <div class="p-2">
+                        <h4 class="text-2xl md:text-3xl font-black text-emerald-400 font-outfit">&lt; 24h</h4>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">UPI Payouts</p>
+                    </div>
+                    <div class="p-2">
+                        <h4 class="text-2xl md:text-3xl font-black text-yellow-400 font-outfit">7 Days</h4>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">Daily Streaks</p>
+                    </div>
+                    <div class="p-2">
+                        <h4 class="text-2xl md:text-3xl font-black text-pink-400 font-outfit">50,000</h4>
+                        <p class="text-[11px] text-gray-400 uppercase font-semibold">Weekly Coins</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">24 Hours</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">UPI Transfers</p>
+
+            <!-- Right Interactive Phone Mockup (Real App UI Simulation) -->
+            <div class="lg:col-span-5 flex flex-col items-center justify-center relative">
+                
+                <!-- Interactive Hint Pill -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-pink-500/20 border border-pink-500/40 text-[11px] font-bold text-pink-300 mb-3 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>
+                    <span>Interactive App Simulator • Tap the bottom tabs!</span>
+                </div>
+
+                <!-- Phone Frame Container -->
+                <div class="phone-mockup">
+                    
+                    <!-- Dynamic Island Notch -->
+                    <div class="phone-notch">
+                        <div class="notch-camera"></div>
+                        <div class="notch-sensor"></div>
+                    </div>
+
+                    <!-- Android Status Bar -->
+                    <div class="pt-3 px-6 pb-2 flex justify-between items-center text-[10px] text-gray-400 font-bold z-40 select-none">
+                        <span>9:41</span>
+                        <div class="flex items-center gap-1.5 text-xs text-gray-300">
+                            <i class="fa-solid fa-wifi text-[10px]"></i>
+                            <i class="fa-solid fa-signal text-[10px]"></i>
+                            <i class="fa-solid fa-battery-full text-xs text-emerald-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- SCREEN 1: DASHBOARD (HOME)                     -->
+                    <!-- ============================================== -->
+                    <div id="screen-home" class="app-screen active px-4 pt-2">
+                        
+                        <!-- Top Header: User Greeting & Avatar -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=GigUser&backgroundColor=ff007a" alt="User Avatar" class="w-11 h-11 rounded-full border-2 border-yellow-400 p-0.5 bg-[#1F2937]">
+                                    <i class="fa-solid fa-crown text-yellow-400 text-[10px] absolute -top-1 -right-1 drop-shadow"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-extrabold text-white flex items-center gap-1">
+                                        Hi, User <span class="text-xs">👋</span>
+                                    </h4>
+                                    <p class="text-[11px] text-[#9E98B3]">Complete tasks and earn rewards</p>
+                                </div>
+                            </div>
+                            <div class="w-9 h-9 rounded-full bg-[#1A2133] border border-gray-700/80 flex items-center justify-center text-gray-300">
+                                <i class="fa-regular fa-bell text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Hero Balance Card (Real App Gradient) -->
+                        <div class="rounded-2xl p-4 mb-4 relative overflow-hidden text-white shadow-xl" style="background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 50%, #C026D3 100%);">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-[11px] font-bold text-purple-200 uppercase tracking-wider">Your Balance</p>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <i class="fa-solid fa-coins text-yellow-300 text-2xl drop-shadow"></i>
+                                        <span id="mockup-coins-display" class="text-3xl font-black font-outfit">160</span>
+                                        <span class="text-xs font-bold text-purple-200">Coins</span>
+                                    </div>
+                                    <!-- Rupee Pill -->
+                                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 mt-2 rounded-full bg-black/30 border border-white/10 text-[11px] font-bold text-emerald-300">
+                                        <i class="fa-solid fa-indian-rupee-sign text-[9px]"></i>
+                                        <span id="mockup-inr-display">≈ ₹1.60 INR</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-wallet text-5xl text-white/15 -mr-1 -mt-1"></i>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="grid grid-cols-2 gap-2 mt-4">
+                                <button onclick="switchAppTab('wallet')" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95">
+                                    <i class="fa-solid fa-wallet text-[11px]"></i> Withdraw
+                                </button>
+                                <button onclick="switchAppTab('tasks')" class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-extrabold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md">
+                                    <i class="fa-solid fa-bolt text-[11px]"></i> Earn More
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Daily Check-in Card (Real App Feature) -->
+                        <div class="bg-[#111623] border border-gray-800 rounded-2xl p-3.5 mb-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-lg">
+                                    <i class="fa-regular fa-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-white">Daily Check-in</h5>
+                                    <p class="text-[10px] text-gray-400">Claim your daily reward</p>
+                                </div>
+                            </div>
+                            <button id="btn-claim-streak" onclick="claimDailyStreakMockup()" class="btn-gradient text-white text-[11px] font-bold py-1.5 px-3 rounded-full flex items-center gap-1 shadow-md active:scale-95 transition">
+                                <i class="fa-solid fa-gift text-[10px]"></i>
+                                <span id="btn-claim-streak-text">Claim Now</span>
+                            </button>
+                        </div>
+
+                        <!-- Quick Actions 4-Grid (Real App) -->
+                        <div class="grid grid-cols-4 gap-2 mb-4">
+                            <!-- All Tasks -->
+                            <div onclick="switchAppTab('tasks')" class="bg-[#111623] border border-gray-800 rounded-xl p-2.5 flex flex-col items-center justify-center text-center cursor-pointer hover:border-purple-500 transition">
+                                <div class="w-9 h-9 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm mb-1">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white">All Tasks</span>
+                            </div>
+                            <!-- Telegram -->
+                            <a href="https://t.me/gigbounty" target="_blank" class="bg-[#111623] border border-gray-800 rounded-xl p-2.5 flex flex-col items-center justify-center text-center cursor-pointer hover:border-blue-400 transition">
+                                <div class="w-9 h-9 rounded-full bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm mb-1">
+                                    <i class="fa-brands fa-telegram"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white">Telegram</span>
+                            </a>
+                            <!-- Offers -->
+                            <div onclick="switchAppTab('tasks')" class="bg-[#111623] border border-gray-800 rounded-xl p-2.5 flex flex-col items-center justify-center text-center cursor-pointer hover:border-amber-400 transition">
+                                <div class="w-9 h-9 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm mb-1">
+                                    <i class="fa-solid fa-tags"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white">Offers</span>
+                            </div>
+                            <!-- Invite & Earn -->
+                            <div onclick="openReferModalMockup()" class="bg-[#111623] border border-gray-800 rounded-xl p-2.5 flex flex-col items-center justify-center text-center cursor-pointer hover:border-pink-500 transition">
+                                <div class="w-9 h-9 rounded-full bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm mb-1">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white">Invite</span>
+                            </div>
+                        </div>
+
+                        <!-- Promo Banner Card: Answer Questions -->
+                        <div onclick="switchAppTab('tasks')" class="task-card-questions rounded-2xl p-3.5 flex items-center justify-between cursor-pointer shadow-lg hover:opacity-95 transition">
+                            <div>
+                                <span class="text-[9px] font-black uppercase tracking-wider bg-black/30 px-2 py-0.5 rounded-full text-white">EARN COINS</span>
+                                <h5 class="text-xs font-extrabold text-white mt-1">Answer Questions</h5>
+                                <p class="text-[10px] text-white/90">Take surveys &amp; get +15 Coins each</p>
+                            </div>
+                            <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-base">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- SCREEN 2: TASKS SCREEN                         -->
+                    <!-- ============================================== -->
+                    <div id="screen-tasks" class="app-screen px-4 pt-2">
+                        
+                        <div class="mb-3">
+                            <h3 class="text-base font-black text-white flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-pink-500"></i> Task &amp; Earn
+                            </h3>
+                            <p class="text-[11px] text-gray-400">Complete tasks to earn unlimited coins</p>
+                        </div>
+
+                        <!-- 1. Math Quiz Card -->
+                        <div class="task-card-math rounded-2xl p-4 mb-3 text-white relative overflow-hidden shadow-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider bg-black/25 px-2 py-0.5 rounded-full">BRAIN CHALLENGE</span>
+                                    <h4 class="text-sm font-extrabold mt-1">Math Quiz</h4>
+                                    <p class="text-[11px] text-white/90 max-w-[200px] mt-0.5">Solve simple calculations in 15 seconds. Win +10 Coins per question!</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-calculator"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between pt-2 border-t border-white/15">
+                                <span class="text-[10px] font-bold text-white/90">Daily Limit: 10/10</span>
+                                <span class="text-[10px] font-extrabold bg-white text-teal-800 px-2.5 py-0.5 rounded-full">Play Now</span>
+                            </div>
+                        </div>
+
+                        <!-- 2. Answer Questions / Surveys Card -->
+                        <div class="task-card-questions rounded-2xl p-4 mb-3 text-white relative overflow-hidden shadow-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider bg-black/25 px-2 py-0.5 rounded-full">OPINION SURVEYS</span>
+                                    <h4 class="text-sm font-extrabold mt-1">Answer Questions</h4>
+                                    <p class="text-[11px] text-white/90 max-w-[200px] mt-0.5">Answer 3-5 simple questions about daily topics &amp; earn +15 Coins!</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-square-check"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between pt-2 border-t border-white/15">
+                                <span class="text-[10px] font-bold text-white/90">Instant Credit</span>
+                                <span class="text-[10px] font-extrabold bg-white text-orange-800 px-2.5 py-0.5 rounded-full">Start Survey</span>
+                            </div>
+                        </div>
+
+                        <!-- 3. Word Puzzle Card -->
+                        <div class="task-card-word rounded-2xl p-4 mb-3 text-white relative overflow-hidden shadow-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider bg-black/25 px-2 py-0.5 rounded-full">VOCABULARY</span>
+                                    <h4 class="text-sm font-extrabold mt-1">Word Puzzle</h4>
+                                    <p class="text-[11px] text-white/90 max-w-[200px] mt-0.5">Unscramble letters to find the correct word. Earn +12 Coins!</p>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-spell-check"></i>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between pt-2 border-t border-white/15">
+                                <span class="text-[10px] font-bold text-white/90">Skill Game</span>
+                                <span class="text-[10px] font-extrabold bg-white text-indigo-800 px-2.5 py-0.5 rounded-full">Play Puzzle</span>
+                            </div>
+                        </div>
+
+                        <!-- Daily Streak Mini View -->
+                        <div class="bg-[#111623] border border-gray-800 rounded-2xl p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs font-bold text-yellow-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-fire text-orange-500"></i> 7-Day Bonus Strike
+                                </span>
+                                <span class="text-[10px] text-gray-400 font-semibold">Up to 700 Coins/wk</span>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-center">
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>M</span><br><b class="text-yellow-400">100</b></div>
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>T</span><br><b class="text-yellow-400">100</b></div>
+                                <div class="bg-indigo-600 rounded-lg p-1 text-[9px] text-white font-bold border border-indigo-400"><span>W</span><br><b class="text-yellow-300">100</b></div>
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>T</span><br><b class="text-yellow-400">100</b></div>
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>F</span><br><b class="text-yellow-400">100</b></div>
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>S</span><br><b class="text-yellow-400">100</b></div>
+                                <div class="bg-gray-800/80 rounded-lg p-1 text-[9px] text-gray-400"><span>S</span><br><b class="text-yellow-400">100</b></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- SCREEN 3: WALLET SCREEN                        -->
+                    <!-- ============================================== -->
+                    <div id="screen-wallet" class="app-screen px-4 pt-2">
+                        
+                        <div class="mb-3">
+                            <h3 class="text-base font-black text-white flex items-center gap-2">
+                                <i class="fa-solid fa-wallet text-purple-400"></i> My Wallet
+                            </h3>
+                            <p class="text-[11px] text-gray-400">Manage earnings and redeem real rewards</p>
+                        </div>
+
+                        <!-- Wallet Balance Card (Neon Glow) -->
+                        <div class="rounded-2xl p-4 mb-3 relative overflow-hidden text-white shadow-xl" style="background: linear-gradient(135deg, #312E81 0%, #4338CA 50%, #6366F1 100%);">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-indigo-200">Available Balance</p>
+                            <div class="flex items-baseline gap-2 mt-1">
+                                <span class="text-3xl font-black font-outfit">160</span>
+                                <span class="text-sm font-bold text-indigo-200">Coins</span>
+                            </div>
+                            <div class="inline-block px-2.5 py-0.5 mt-2 rounded-full bg-black/30 border border-white/10 text-[11px] font-bold text-emerald-300">
+                                ≈ ₹1.60 INR
+                            </div>
+                            <i class="fa-solid fa-coins text-5xl text-white/10 absolute top-4 right-4"></i>
+                        </div>
+
+                        <!-- Method Toggle Pills (UPI vs Gift Cards) -->
+                        <div class="bg-[#1A2133] p-1 rounded-xl flex mb-3 border border-gray-700/60">
+                            <button id="mockup-tab-upi" onclick="toggleWalletMockupMethod('upi')" class="flex-1 py-1.5 rounded-lg text-xs font-extrabold text-white bg-purple-600 shadow-md transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-bolt text-yellow-300 text-[10px]"></i> UPI Cash
+                            </button>
+                            <button id="mockup-tab-cards" onclick="toggleWalletMockupMethod('cards')" class="flex-1 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-gift text-[10px]"></i> Gift Cards
+                            </button>
+                        </div>
+
+                        <!-- UPI Content -->
+                        <div id="mockup-method-upi" class="space-y-3">
+                            <div class="grid grid-cols-3 gap-2">
+                                <div onclick="selectWithdrawMockup(10, 1000, this)" class="withdraw-chip bg-[#1A2133] border-2 border-pink-500 rounded-xl p-2.5 text-center cursor-pointer transition">
+                                    <h5 class="text-sm font-black text-white">₹10</h5>
+                                    <p class="text-[9px] text-gray-400 font-semibold">1000 Coins</p>
+                                </div>
+                                <div onclick="selectWithdrawMockup(25, 2500, this)" class="withdraw-chip bg-[#1A2133] border border-gray-700 rounded-xl p-2.5 text-center cursor-pointer transition">
+                                    <h5 class="text-sm font-black text-white">₹25</h5>
+                                    <p class="text-[9px] text-gray-400 font-semibold">2500 Coins</p>
+                                </div>
+                                <div onclick="selectWithdrawMockup(50, 5000, this)" class="withdraw-chip bg-[#1A2133] border border-gray-700 rounded-xl p-2.5 text-center cursor-pointer transition">
+                                    <h5 class="text-sm font-black text-white">₹50</h5>
+                                    <p class="text-[9px] text-gray-400 font-semibold">5000 Coins</p>
+                                </div>
+                            </div>
+
+                            <!-- UPI Input -->
+                            <div class="bg-[#111623] border border-gray-700 rounded-xl px-3 py-2 flex items-center gap-2">
+                                <i class="fa-solid fa-at text-purple-400 text-xs"></i>
+                                <input type="text" placeholder="Enter UPI ID (e.g. name@upi)" value="user@okhdfcbank" class="bg-transparent text-white text-xs w-full outline-none font-medium">
+                            </div>
+
+                            <button onclick="alert('In the live Android app, this executes an instant UPI cashout verification!')" class="btn-gradient w-full text-white text-xs font-bold py-2.5 rounded-xl shadow-lg active:scale-95 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> Withdraw to UPI
+                            </button>
+                        </div>
+
+                        <!-- Gift Cards Content -->
+                        <div id="mockup-method-cards" class="space-y-3 hidden">
+                            <!-- Play Store -->
+                            <div class="bg-[#1A2133] border border-gray-700 rounded-xl p-3 flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                                        <i class="fa-brands fa-google-play"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold text-white">Google Play Code</h5>
+                                        <p class="text-[10px] text-gray-400">₹10, ₹25, ₹50 codes to email</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">Redeem</span>
+                            </div>
+
+                            <!-- Amazon -->
+                            <div class="bg-[#1A2133] border border-gray-700 rounded-xl p-3 flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm">
+                                        <i class="fa-brands fa-amazon"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold text-white">Amazon Gift Card</h5>
+                                        <p class="text-[10px] text-gray-400">Digital code to delivery email</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">Redeem</span>
+                            </div>
+
+                            <!-- Delivery Email Input -->
+                            <div class="bg-[#111623] border border-gray-700 rounded-xl px-3 py-2 flex items-center gap-2">
+                                <i class="fa-regular fa-envelope text-gray-400 text-xs"></i>
+                                <input type="email" placeholder="Your Delivery Email" value="user@example.com" class="bg-transparent text-white text-xs w-full outline-none font-medium">
+                            </div>
+                        </div>
+
+                        <!-- Diamonds Converter Card (Real App Feature) -->
+                        <div class="mt-3 bg-[#111623] border border-purple-500/30 rounded-xl p-3 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-gem text-pink-400 text-base"></i>
+                                <div>
+                                    <h5 class="text-[11px] font-bold text-white">Convert Diamonds</h5>
+                                    <p class="text-[9px] text-gray-400">1000 Diamonds = 10,000 Coins</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-bold bg-pink-500/20 text-pink-300 px-2 py-1 rounded-md">Convert</span>
+                        </div>
+
+                    </div>
+
+                    <!-- ============================================== -->
+                    <!-- SCREEN 4: LEADERBOARD SCREEN                   -->
+                    <!-- ============================================== -->
+                    <div id="screen-leaderboard" class="app-screen px-4 pt-2">
+                        
+                        <div class="flex justify-between items-center mb-3">
+                            <div>
+                                <h3 class="text-base font-black text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-trophy text-yellow-400"></i> Weekly Rankings
+                                </h3>
+                                <p class="text-[10px] text-gray-400">Compete &amp; win massive coin rewards</p>
+                            </div>
+                            <span class="text-[9px] font-extrabold bg-green-500/15 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full">
+                                <i class="fa-solid fa-clock"></i> Active
+                            </span>
+                        </div>
+
+                        <!-- Podium Layout (Real App Podium) -->
+                        <div class="flex items-end justify-center gap-2 h-44 mb-3 pt-2">
+                            <!-- Rank 2 -->
+                            <div class="flex flex-col items-center">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=MR" class="w-9 h-9 rounded-full bg-teal-800 border-2 border-gray-400 mb-1" alt="Rank 2">
+                                <span class="text-[10px] font-bold text-white">MR</span>
+                                <span class="text-[9px] text-pink-400 font-extrabold flex items-center gap-0.5">6 <i class="fa-solid fa-gem text-[7px]"></i></span>
+                                <div class="w-16 h-16 bg-gradient-to-t from-gray-800 to-gray-600 rounded-t-lg flex flex-col items-center justify-start pt-1.5 shadow-md">
+                                    <span class="text-base font-black text-white">2</span>
+                                    <span class="text-[8px] text-gray-300">10k Coins</span>
+                                </div>
+                            </div>
+
+                            <!-- Rank 1 -->
+                            <div class="flex flex-col items-center relative">
+                                <i class="fa-solid fa-crown text-yellow-400 text-xs absolute -top-3 left-1/2 -translate-x-1/2 drop-shadow"></i>
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sharmil&backgroundColor=ff0000" class="w-11 h-11 rounded-full bg-red-600 border-2 border-yellow-400 mb-1 shadow-lg" alt="Rank 1">
+                                <span class="text-[11px] font-extrabold text-white">Sharmil</span>
+                                <span class="text-[9px] text-pink-400 font-extrabold flex items-center gap-0.5">10 <i class="fa-solid fa-gem text-[7px]"></i></span>
+                                <div class="w-20 h-24 bg-gradient-to-t from-yellow-700 to-yellow-500 rounded-t-lg flex flex-col items-center justify-start pt-1.5 shadow-lg border-t border-yellow-300">
+                                    <span class="text-xl font-black text-white">1</span>
+                                    <span class="text-[9px] font-extrabold text-white">50k Coins</span>
+                                </div>
+                            </div>
+
+                            <!-- Rank 3 -->
+                            <div class="flex flex-col items-center">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Krish" class="w-9 h-9 rounded-full bg-teal-700 border-2 border-amber-600 mb-1" alt="Rank 3">
+                                <span class="text-[10px] font-bold text-white">Krish</span>
+                                <span class="text-[9px] text-pink-400 font-extrabold flex items-center gap-0.5">9 <i class="fa-solid fa-gem text-[7px]"></i></span>
+                                <div class="w-16 h-12 bg-gradient-to-t from-orange-950 to-orange-700 rounded-t-lg flex flex-col items-center justify-start pt-1.5 shadow-md">
+                                    <span class="text-base font-black text-white">3</span>
+                                    <span class="text-[8px] text-orange-200">5k Coins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rule Notice -->
+                        <div class="bg-pink-500/10 border border-pink-500/20 rounded-xl p-2.5 mb-2.5 flex items-start gap-2 text-[10px] text-pink-200">
+                            <i class="fa-solid fa-circle-info text-pink-400 mt-0.5"></i>
+                            <span>Minimum 500 Pink Diamonds required to qualify for weekly payouts.</span>
+                        </div>
+
+                        <!-- Current User Rank Row -->
+                        <div class="bg-[#111623] border border-gray-700 rounded-xl p-2.5 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-black text-gray-400 w-5">#42</span>
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=GigUser&backgroundColor=ff007a" class="w-7 h-7 rounded-full bg-gray-800" alt="You">
+                                <span class="text-xs font-bold text-white">You</span>
+                            </div>
+                            <span class="text-xs font-bold text-pink-400 flex items-center gap-1">180 <i class="fa-solid fa-gem text-[9px]"></i></span>
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom App Navigation Bar (Simulates Real App Tabs) -->
+                    <div class="phone-bottom-nav select-none">
+                        <div id="tab-btn-home" onclick="switchAppTab('home')" class="app-nav-btn active">
+                            <i class="fa-solid fa-house text-sm"></i>
+                            <span class="text-[9px] font-bold">Home</span>
+                        </div>
+                        <div id="tab-btn-tasks" onclick="switchAppTab('tasks')" class="app-nav-btn">
+                            <i class="fa-solid fa-list-check text-sm"></i>
+                            <span class="text-[9px] font-bold">Tasks</span>
+                        </div>
+                        <div id="tab-btn-wallet" onclick="switchAppTab('wallet')" class="app-nav-btn">
+                            <i class="fa-solid fa-wallet text-sm"></i>
+                            <span class="text-[9px] font-bold">Wallet</span>
+                        </div>
+                        <div id="tab-btn-leaderboard" onclick="switchAppTab('leaderboard')" class="app-nav-btn">
+                            <i class="fa-solid fa-trophy text-sm"></i>
+                            <span class="text-[9px] font-bold">Rankings</span>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">7 Days</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Bonus Streaks</p>
-            </div>
-            <div class="p-2">
-                <h4 class="text-2xl md:text-3xl font-bold text-white mb-1">50000</h4>
-                <p class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold">Top Reward Coins</p>
-            </div>
+
         </div>
     </section>
 
-    <!-- 3. Play & Earn (Features) -->
-    <section id="how-to-earn" class="py-16 md:py-20 px-4 sm:px-6 bg-[#0B0E17]">
+    <!-- 3. Live Payout Ticker Marquee -->
+    <div class="marquee-wrapper">
+        <div class="marquee-content flex gap-8 items-center text-xs md:text-sm font-semibold">
+            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Amit from Mumbai withdrew ₹50 via UPI</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Sneha from Surat redeemed ₹25 Google Play Code</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-pink-400 flex items-center gap-1.5"><i class="fa-solid fa-trophy"></i> Sharmil won #1 Weekly Tournament (50,000 Coins)</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Yash from Delhi withdrew ₹10 via UPI</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-gift"></i> Priya from Pune redeemed ₹50 Amazon Gift Card</span>
+            <span class="text-gray-600">•</span>
+            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Rohan from Ahmedabad withdrew ₹25 via UPI</span>
+        </div>
+    </div>
+
+    <!-- 4. Play & Earn (Features / Real App Modules) -->
+    <section id="how-to-earn" class="py-20 md:py-28 px-4 sm:px-6 bg-[#0B0E17] relative">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-10 md:mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-3 md:mb-4">Play & Earn</h2>
-                <p class="text-gray-400 text-sm md:text-lg px-2">Multiple tasks designed to maximize your daily coin earnings.</p>
+            
+            <div class="text-center mb-16 md:mb-20">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold mb-3 border border-blue-500/20">
+                    <i class="fa-solid fa-gamepad"></i> SKILL-BASED ACTIVITIES
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-outfit mb-4">
+                    Play Games, Solve &amp; <span class="text-gradient-purple">Earn Every Day</span>
+                </h2>
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto px-2">
+                    Every task in GigBounty is designed to be engaging, fair, and instantly rewarded. Earn both Coins for payouts and Pink Diamonds for weekly rankings.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+            <!-- 3 Main Tasks Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                
                 <!-- Math Quiz -->
-                <div class="task-card-math rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg">
-                    <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Math Quiz</h3>
-                    <p class="text-white/90 text-sm md:text-base font-medium relative z-10">Sharpen your brain and earn rewards for correct answers.</p>
-                    <i class="fa-solid fa-calculator absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
+                <div class="app-surface app-surface-hover rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="text-2xl font-black font-outfit text-white mb-2">Math Quiz</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Put your speed to the test! Answer quick arithmetic questions with a 15-second timer. Each correct solution awards +10 Coins immediately.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between text-xs font-bold text-teal-400">
+                        <span>10 Daily Chances</span>
+                        <span class="flex items-center gap-1">+10 Coins <i class="fa-solid fa-coins text-yellow-400"></i></span>
+                    </div>
                 </div>
 
-                <!-- Answer Questions -->
-                <div class="task-card-scratch rounded-2xl md:rounded-3xl p-6 md:p-8 relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-lg">
-                    <h3 class="text-2xl md:text-3xl font-extrabold mb-2 text-white">Answer Questions</h3>
-                    <p class="text-white/90 text-sm md:text-base font-medium relative z-10">Complete simple surveys and earn +15 coins per survey.</p>
-                    <i class="fa-solid fa-check-double absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 text-7xl md:text-9xl text-white/10 group-hover:rotate-12 transition-transform"></i>
+                <!-- Answer Questions / Surveys -->
+                <div class="app-surface app-surface-hover rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                        <h3 class="text-2xl font-black font-outfit text-white mb-2">Answer Questions</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Complete simple, non-intrusive 3 to 5 question surveys on consumer habits, lifestyle, and media preferences to earn +15 Coins per survey.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between text-xs font-bold text-amber-400">
+                        <span>Instant Verification</span>
+                        <span class="flex items-center gap-1">+15 Coins <i class="fa-solid fa-coins text-yellow-400"></i></span>
+                    </div>
                 </div>
+
+                <!-- Word Puzzle -->
+                <div class="app-surface app-surface-hover rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-xl relative overflow-hidden group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-spell-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-black font-outfit text-white mb-2">Word Puzzle</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Unscramble jumbled letter tiles to form correct words. Boost vocabulary, train memory, and pocket +12 Coins for every solved puzzle.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex items-center justify-between text-xs font-bold text-purple-400">
+                        <span>Daily Vocabulary</span>
+                        <span class="flex items-center gap-1">+12 Coins <i class="fa-solid fa-coins text-yellow-400"></i></span>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Daily Strike Feature -->
-            <div class="mt-6 md:mt-8 card-bg rounded-2xl md:rounded-3xl p-6 md:p-8 border border-gray-800 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8">
+            <!-- Daily Strike Feature (Real App Card) -->
+            <div class="mt-8 app-surface rounded-3xl p-6 md:p-10 border border-gray-800 flex flex-col lg:flex-row items-center justify-between gap-8 max-w-6xl mx-auto shadow-2xl">
                 <div class="w-full lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-500 text-[10px] md:text-xs font-bold mb-2 md:mb-3 border border-yellow-500/20">DAILY REWARDS</div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3">Keep Your Daily Strike Active</h3>
-                    <p class="text-gray-400 text-sm md:text-base">Log in every day to claim bonus coins. Reach to unlock massive rewards up to 700 coins Week!</p>
+                    <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-xs font-bold mb-3 border border-yellow-500/20">
+                        <i class="fa-solid fa-fire text-orange-500"></i> 7-DAY STREAK ECOSYSTEM
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-black font-outfit mb-3">Keep Your Daily Strike Active</h3>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+                        Consistency pays off in GigBounty! Open the app every consecutive day to claim streak rewards. Complete the full 7-day streak to accumulate up to 700 Bonus Coins!
+                    </p>
                 </div>
-                <!-- Simulated Daily Strike UI -->
-                <div class="w-full lg:w-1/2 flex justify-start lg:justify-end gap-2 md:gap-3 overflow-x-auto pb-2 hide-scrollbar snap-x">
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px] opacity-50"><span class="text-[10px] md:text-xs text-gray-500">Mon</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px] opacity-50"><span class="text-[10px] md:text-xs text-gray-500">Tue</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px]"><span class="text-[10px] md:text-xs font-bold text-white">Wed</span><div class="w-11 h-14 md:w-12 md:h-14 bg-indigo-600 rounded-xl flex flex-col items-center justify-center border-2 border-indigo-400 shadow-[0_0_10px_rgba(79,70,229,0.5)]"><i class="fa-solid fa-coins text-yellow-400 text-xs md:text-sm mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px]"><span class="text-[10px] md:text-xs text-gray-500">Thu</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px]"><span class="text-[10px] md:text-xs text-gray-500">Fri</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px]"><span class="text-[10px] md:text-xs text-gray-500">Sat</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
-                    <div class="snap-center flex flex-col items-center gap-1 md:gap-2 min-w-[45px] md:min-w-[50px]"><span class="text-[10px] md:text-xs text-gray-500">Sun</span><div class="w-10 h-12 md:w-12 md:h-14 bg-gray-800 rounded-xl flex flex-col items-center justify-center"><i class="fa-solid fa-coins text-yellow-500 text-[10px] md:text-xs mb-1"></i><span class="text-[10px] md:text-xs font-bold">100</span></div></div>
+                
+                <!-- Daily Streak Days Display -->
+                <div class="w-full lg:w-1/2 flex justify-start lg:justify-end gap-2 md:gap-3 overflow-x-auto pb-2">
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-gray-500 font-bold">Mon</span>
+                        <div class="w-12 h-14 bg-gray-800/80 rounded-2xl flex flex-col items-center justify-center border border-gray-700">
+                            <i class="fa-solid fa-coins text-yellow-500 text-xs mb-1"></i>
+                            <span class="text-xs font-bold text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-gray-500 font-bold">Tue</span>
+                        <div class="w-12 h-14 bg-gray-800/80 rounded-2xl flex flex-col items-center justify-center border border-gray-700">
+                            <i class="fa-solid fa-coins text-yellow-500 text-xs mb-1"></i>
+                            <span class="text-xs font-bold text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-indigo-400 font-bold">Wed</span>
+                        <div class="w-12 h-14 bg-indigo-600 rounded-2xl flex flex-col items-center justify-center border-2 border-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+                            <i class="fa-solid fa-fire text-yellow-300 text-sm mb-1"></i>
+                            <span class="text-xs font-black text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-gray-500 font-bold">Thu</span>
+                        <div class="w-12 h-14 bg-gray-800/80 rounded-2xl flex flex-col items-center justify-center border border-gray-700">
+                            <i class="fa-solid fa-coins text-yellow-500 text-xs mb-1"></i>
+                            <span class="text-xs font-bold text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-gray-500 font-bold">Fri</span>
+                        <div class="w-12 h-14 bg-gray-800/80 rounded-2xl flex flex-col items-center justify-center border border-gray-700">
+                            <i class="fa-solid fa-coins text-yellow-500 text-xs mb-1"></i>
+                            <span class="text-xs font-bold text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-gray-500 font-bold">Sat</span>
+                        <div class="w-12 h-14 bg-gray-800/80 rounded-2xl flex flex-col items-center justify-center border border-gray-700">
+                            <i class="fa-solid fa-coins text-yellow-500 text-xs mb-1"></i>
+                            <span class="text-xs font-bold text-white">100</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-1.5 min-w-[50px]">
+                        <span class="text-xs text-yellow-400 font-bold">Sun</span>
+                        <div class="w-12 h-14 bg-gradient-to-t from-yellow-700 to-yellow-500 rounded-2xl flex flex-col items-center justify-center border border-yellow-300 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                            <i class="fa-solid fa-crown text-white text-xs mb-1"></i>
+                            <span class="text-xs font-black text-white">100</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- 4. Wallet Section -->
-    <section id="wallet" class="py-16 md:py-20 px-4 sm:px-6">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-12 items-center">
+    <!-- 5. Transparent Wallet & Cashout Section -->
+    <section id="wallet" class="py-20 md:py-28 px-4 sm:px-6 relative">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
             
             <!-- Left Info -->
             <div class="w-full lg:w-1/2 text-center lg:text-left">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Simple Wallet, <br class="hidden lg:block"><span class="text-gradient">Fast Withdrawals</span></h2>
-                <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-2 lg:px-0">GigBounty offers the most transparent withdrawal system. No hidden charges. Enter your UPI ID, select the amount, and get paid within 24 hours.</p>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-3 border border-emerald-500/20">
+                    <i class="fa-solid fa-shield-halved"></i> SECURE &amp; VERIFIED REDEMPTIONS
+                </div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-outfit mb-4">
+                    Fast Withdrawals, <br class="hidden lg:block">
+                    <span class="text-gradient-purple">Zero Hidden Fees</span>
+                </h2>
+                <p class="text-gray-300 text-base md:text-lg mb-8 leading-relaxed">
+                    We believe you should enjoy your hard-earned rewards without delays. Submit your withdrawal request in seconds, track status via in-app history, and receive funds in under 24 hours.
+                </p>
+
+                <!-- 3 Supported Payout Gateways -->
+                <div class="space-y-4 max-w-md mx-auto lg:mx-0 text-left">
+                    <div class="app-surface rounded-2xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl font-bold">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-white">Direct UPI Cash Transfer</h4>
+                            <p class="text-xs text-gray-400">Cash directly transferred to any verified Indian UPI VPA.</p>
+                        </div>
+                    </div>
+
+                    <div class="app-surface rounded-2xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
+                            <i class="fa-brands fa-google-play"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-white">Google Play Store Redeem Codes</h4>
+                            <p class="text-xs text-gray-400">Digital voucher codes delivered straight to your email inbox.</p>
+                        </div>
+                    </div>
+
+                    <div class="app-surface rounded-2xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl font-bold">
+                            <i class="fa-brands fa-amazon"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-white">Amazon Gift Cards</h4>
+                            <p class="text-xs text-gray-400">Instant gift card voucher codes for shopping on Amazon India.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Right: Wallet Mockup UI -->
-            <div class="w-full lg:w-1/2 max-w-md mx-auto lg:max-w-none">
-                <div class="card-bg border border-gray-700 rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-2xl relative">
-                    <!-- Wallet Header -->
-                    <div class="bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl md:rounded-2xl p-5 md:p-6 mb-5 md:mb-6 text-white shadow-lg relative overflow-hidden">
-                        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-1 md:mb-2">Available Balance</p>
-                        <h2 class="text-3xl md:text-4xl font-black mb-1">160 <span class="text-sm md:text-lg font-medium">Coins</span></h2>
-                        <p class="text-xs md:text-sm opacity-90">≈ ₹1.6 INR</p>
-                        <i class="fa-solid fa-wallet absolute top-4 right-4 md:top-6 md:right-6 text-3xl md:text-4xl opacity-20"></i>
-                    </div>
-
-                    <h3 class="font-bold text-base md:text-lg mb-3 md:mb-4 text-white">Cashout Options</h3>
+            <!-- Right Interactive Card Preview -->
+            <div class="w-full lg:w-1/2 max-w-lg mx-auto">
+                <div class="app-surface rounded-3xl p-6 md:p-8 shadow-2xl border border-gray-700/80">
                     
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mb-5 md:mb-6">
-                        <!-- 10 Rs -->
-                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
-                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹10</h4>
-                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">1000 Coins</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-wallet"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Live Cashout Portal</h3>
+                                <p class="text-xs text-gray-400">Choose your payout amount</p>
+                            </div>
                         </div>
-                        <!-- 25 Rs -->
-                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
-                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹25</h4>
-                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">2500 Coins</p>
+                        <span class="text-xs font-bold bg-emerald-500/15 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30">
+                            Min ₹10
+                        </span>
+                    </div>
+
+                    <!-- Available Denominations -->
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <div class="bg-[#1A2133] border-2 border-pink-500 rounded-2xl p-4 text-center">
+                            <h4 class="text-2xl font-black text-white font-outfit">₹10</h4>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">1000 Coins</p>
                         </div>
-                        <!-- 50 Rs -->
-                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
-                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹50</h4>
-                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">5000 Coins</p>
+                        <div class="bg-[#1A2133] border border-gray-700 rounded-2xl p-4 text-center">
+                            <h4 class="text-2xl font-black text-white font-outfit">₹25</h4>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">2500 Coins</p>
                         </div>
-                        <!-- 75 Rs -->
-                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
-                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹75</h4>
-                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">7500 Coins</p>
-                        </div>
-                        <!-- 100 Rs -->
-                        <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 text-center cursor-pointer hover:border-pink-500 transition">
-                            <h4 class="text-xl md:text-2xl font-bold text-white mb-1">₹100</h4>
-                            <p class="text-[9px] md:text-[10px] text-gray-400 font-semibold whitespace-nowrap">10000 Coins</p>
+                        <div class="bg-[#1A2133] border border-gray-700 rounded-2xl p-4 text-center">
+                            <h4 class="text-2xl font-black text-white font-outfit">₹50</h4>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">5000 Coins</p>
                         </div>
                     </div>
 
-                    <div class="bg-[#1a2133] border border-gray-700 rounded-lg md:rounded-xl p-3 md:p-4 flex items-center gap-3 mb-4">
-                        <i class="fa-brands fa-google-pay text-indigo-400 text-lg md:text-xl"></i>
-                        <input type="text" placeholder="Enter UPI ID" class="bg-transparent border-none outline-none w-full text-white placeholder-gray-500 text-xs md:text-sm" disabled>
+                    <!-- Diamond Conversion Feature Box -->
+                    <div class="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-2xl p-4 mb-6 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-gem"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-sm font-bold text-white">Pink Diamond Exchange</h5>
+                                <p class="text-xs text-gray-300">1000 Diamonds ⇄ 10,000 Coins</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrows-rotate text-purple-400 text-lg"></i>
                     </div>
 
-                    <button class="w-full bg-[#1f2937] text-gray-400 py-3 md:py-4 rounded-lg md:rounded-xl font-bold text-xs md:text-sm tracking-widest cursor-not-allowed">
-                        SELECT AMOUNT
-                    </button>
+                    <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="btn-gradient w-full py-4 rounded-xl font-bold text-sm tracking-wider uppercase text-white flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-brands fa-google-play"></i> Install App to Withdraw
+                    </a>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 5. Weekly Rankings (Leaderboard) -->
-    <section id="leaderboard" class="py-16 md:py-20 px-4 sm:px-6 bg-[#0B0E17] border-t border-gray-800">
+    <!-- 6. Weekly Rankings & Leaderboard Section -->
+    <section id="leaderboard" class="py-20 md:py-28 px-4 sm:px-6 bg-[#0B0E17] border-t border-gray-800/80">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
             
-            <!-- Left: Leaderboard Info -->
+            <!-- Left Info -->
             <div class="w-full lg:w-1/2 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-green-500/10 border border-green-500/20 text-xs md:text-sm font-bold text-green-400 mb-4 md:mb-6">
-                    <i class="fa-solid fa-stopwatch"></i> Weekly Ranking Active
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-xs sm:text-sm font-bold text-green-400 mb-4">
+                    <i class="fa-solid fa-stopwatch"></i> Weekly Tournament Active
                 </div>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">Compete & Win <br class="hidden lg:block"><span class="text-gradient">Massive Rewards</span></h2>
-                <p class="text-gray-400 text-sm md:text-lg mb-6 md:mb-8 px-2 lg:px-0">GigBounty rewards top performers every week. Collect Pink Diamonds by completing tasks and climb the ranks to win massive coin rewards.</p>
                 
-                <div class="card-bg border border-gray-800 rounded-xl md:rounded-2xl p-5 md:p-6 mb-4 shadow-lg text-left max-w-md mx-auto lg:mx-0">
-                    <h3 class="text-lg md:text-xl font-bold text-pink-500 mb-3 md:mb-4 flex items-center gap-2"><i class="fa-solid fa-trophy"></i> Top 3 Rewards</h3>
-                    <ul class="space-y-3 md:space-y-4">
-                        <li class="flex items-center gap-3 md:gap-4">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-yellow-500/20 text-yellow-500 flex items-center justify-center font-bold text-sm md:text-base">1</div>
-                            <span class="text-white font-semibold text-sm md:text-lg">50000 Coins</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-outfit mb-4">
+                    Compete Weekly &amp; Win <br class="hidden lg:block">
+                    <span class="text-gradient-purple">50,000 Coin Rewards</span>
+                </h2>
+                
+                <p class="text-gray-300 text-base md:text-lg mb-8 leading-relaxed">
+                    Collect Pink Diamonds by completing daily challenges. Rise through the global leaderboard and win massive coin jackpots every week!
+                </p>
+
+                <!-- Top 3 Rewards Table -->
+                <div class="app-surface rounded-2xl p-6 mb-6 shadow-xl max-w-md mx-auto lg:mx-0 text-left">
+                    <h3 class="text-base font-bold text-pink-400 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-trophy text-yellow-400"></i> Top Weekly Prizes
+                    </h3>
+                    <ul class="space-y-3.5">
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 flex items-center justify-center font-black text-sm">1</span>
+                                <span class="text-white font-bold text-sm md:text-base">1st Place Champion</span>
+                            </div>
+                            <span class="text-yellow-400 font-extrabold text-sm md:text-base">50,000 Coins</span>
                         </li>
-                        <li class="flex items-center gap-3 md:gap-4">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-400/20 text-gray-300 flex items-center justify-center font-bold text-sm md:text-base">2</div>
-                            <span class="text-white font-semibold text-sm md:text-lg">10000 Coins</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-gray-400/20 text-gray-300 border border-gray-400/40 flex items-center justify-center font-black text-sm">2</span>
+                                <span class="text-white font-bold text-sm md:text-base">2nd Place</span>
+                            </div>
+                            <span class="text-gray-300 font-extrabold text-sm md:text-base">10,000 Coins</span>
                         </li>
-                        <li class="flex items-center gap-3 md:gap-4">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-700/30 text-orange-400 flex items-center justify-center font-bold text-sm md:text-base">3</div>
-                            <span class="text-white font-semibold text-sm md:text-lg">5000 Coins</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-orange-700/30 text-orange-400 border border-orange-700/40 flex items-center justify-center font-black text-sm">3</span>
+                                <span class="text-white font-bold text-sm md:text-base">3rd Place</span>
+                            </div>
+                            <span class="text-orange-400 font-extrabold text-sm md:text-base">5,000 Coins</span>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-pink-500/10 border border-pink-500/20 rounded-lg md:rounded-xl p-2.5 md:p-3 text-[10px] md:text-xs text-pink-300 flex items-start gap-2 max-w-md mx-auto lg:mx-0 text-left">
-                    <i class="fa-solid fa-circle-info mt-0.5"></i>
-                    <span>Minimum 500 Pink Diamonds required to qualify for weekly rewards.</span>
+
+                <div class="bg-pink-500/10 border border-pink-500/20 rounded-xl p-3 text-xs text-pink-300 flex items-start gap-2.5 max-w-md mx-auto lg:mx-0 text-left">
+                    <i class="fa-solid fa-circle-info text-pink-400 mt-0.5"></i>
+                    <span>Minimum 500 Pink Diamonds required to qualify for weekly reward payouts.</span>
                 </div>
             </div>
 
             <!-- Right: Podium UI -->
             <div class="w-full lg:w-1/2 flex justify-center mt-8 lg:mt-0">
-                <div class="flex items-end gap-2 sm:gap-4 md:gap-6 h-56 md:h-64">
+                <div class="flex items-end gap-3 sm:gap-6 h-64 md:h-72">
+                    
                     <!-- Rank 2 -->
                     <div class="flex flex-col items-center">
                         <div class="mb-2 text-center">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=MR" class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-teal-800 border-2 border-gray-500 mb-1" alt="Rank 2">
-                            <p class="text-[10px] md:text-xs font-bold text-white">MR</p>
-                            <p class="text-[8px] md:text-[10px] text-pink-400 font-bold">6 <i class="fa-solid fa-gem"></i></p>
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=MR" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-teal-800 border-2 border-gray-400 mb-1" alt="Rank 2">
+                            <p class="text-xs font-bold text-white">MR</p>
+                            <p class="text-[10px] text-pink-400 font-extrabold flex items-center justify-center gap-1">6 <i class="fa-solid fa-gem text-[8px]"></i></p>
                         </div>
-                        <div class="w-16 sm:w-20 md:w-24 h-20 md:h-24 bg-gradient-to-t from-gray-800 to-gray-500 rounded-t-lg md:rounded-t-xl flex justify-center pt-2">
-                            <span class="text-2xl md:text-3xl font-black text-white">2</span>
+                        <div class="w-20 sm:w-24 md:w-28 h-24 md:h-28 bg-gradient-to-t from-gray-800 to-gray-500 rounded-t-2xl flex flex-col items-center pt-2 shadow-lg">
+                            <span class="text-2xl md:text-3xl font-black text-white font-outfit">2</span>
+                            <span class="text-[10px] text-gray-300 font-bold">10,000</span>
                         </div>
                     </div>
                     
                     <!-- Rank 1 -->
                     <div class="flex flex-col items-center">
                         <div class="mb-2 text-center relative">
-                            <i class="fa-solid fa-crown absolute -top-4 left-1/2 -translate-x-1/2 text-yellow-400 text-lg md:text-xl drop-shadow-md"></i>
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sharmil&backgroundColor=ff0000" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-600 border-2 md:border-4 border-yellow-500 mb-1" alt="Rank 1">
-                            <p class="text-xs md:text-sm font-bold text-white">Sharmil</p>
-                            <p class="text-[8px] md:text-[10px] text-pink-400 font-bold">10 <i class="fa-solid fa-gem"></i></p>
+                            <i class="fa-solid fa-crown absolute -top-5 left-1/2 -translate-x-1/2 text-yellow-400 text-xl md:text-2xl drop-shadow-md"></i>
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Sharmil&backgroundColor=ff0000" class="w-14 h-14 md:w-20 md:h-20 rounded-full bg-red-600 border-4 border-yellow-400 mb-1 shadow-2xl" alt="Rank 1">
+                            <p class="text-sm font-black text-white">Sharmil</p>
+                            <p class="text-[11px] text-pink-400 font-extrabold flex items-center justify-center gap-1">10 <i class="fa-solid fa-gem text-[8px]"></i></p>
                         </div>
-                        <div class="w-20 sm:w-24 md:w-28 h-28 md:h-36 bg-gradient-to-t from-yellow-700 to-yellow-400 rounded-t-lg md:rounded-t-xl flex justify-center pt-2 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                            <span class="text-3xl md:text-4xl font-black text-white">1</span>
+                        <div class="w-24 sm:w-28 md:w-32 h-36 md:h-44 bg-gradient-to-t from-yellow-700 to-yellow-400 rounded-t-2xl flex flex-col items-center pt-3 shadow-[0_0_25px_rgba(250,204,21,0.35)] border-t border-yellow-200">
+                            <span class="text-3xl md:text-4xl font-black text-white font-outfit">1</span>
+                            <span class="text-xs font-black text-yellow-950 bg-yellow-200/90 px-2 py-0.5 rounded-full mt-1">50,000 Coins</span>
                         </div>
                     </div>
 
                     <!-- Rank 3 -->
                     <div class="flex flex-col items-center">
                         <div class="mb-2 text-center">
-                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Krish" class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-teal-700 border-2 border-orange-400 mb-1" alt="Rank 3">
-                            <p class="text-[10px] md:text-xs font-bold text-white">Krish</p>
-                            <p class="text-[8px] md:text-[10px] text-pink-400 font-bold">9 <i class="fa-solid fa-gem"></i></p>
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Krish" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-teal-700 border-2 border-orange-400 mb-1" alt="Rank 3">
+                            <p class="text-xs font-bold text-white">Krish</p>
+                            <p class="text-[10px] text-pink-400 font-extrabold flex items-center justify-center gap-1">9 <i class="fa-solid fa-gem text-[8px]"></i></p>
                         </div>
-                        <div class="w-16 sm:w-20 md:w-24 h-16 md:h-20 bg-gradient-to-t from-orange-900 to-orange-500 rounded-t-lg md:rounded-t-xl flex justify-center pt-2">
-                            <span class="text-2xl md:text-3xl font-black text-white">3</span>
+                        <div class="w-20 sm:w-24 md:w-28 h-20 md:h-24 bg-gradient-to-t from-orange-950 to-orange-600 rounded-t-2xl flex flex-col items-center pt-2 shadow-lg">
+                            <span class="text-2xl md:text-3xl font-black text-white font-outfit">3</span>
+                            <span class="text-[10px] text-orange-200 font-bold">5,000</span>
                         </div>
                     </div>
+
                 </div>
             </div>
 
         </div>
     </section>
 
-   <!-- 8. Footer -->
-    <footer class="py-10 md:py-12 border-t border-gray-800 bg-[#06080D]">
+    <!-- 7. Refer & Earn Section -->
+    <section id="refer" class="py-20 md:py-28 px-4 sm:px-6 relative">
+        <div class="max-w-5xl mx-auto app-surface rounded-3xl p-8 md:p-14 border border-purple-500/30 shadow-2xl relative overflow-hidden text-center">
+            
+            <div class="w-16 h-16 rounded-2xl bg-pink-500/20 border border-pink-500/40 text-pink-400 flex items-center justify-center text-3xl mx-auto mb-6">
+                <i class="fa-solid fa-gift"></i>
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-outfit mb-4">
+                Invite Friends, <span class="text-gradient-purple">Earn 500 Coins</span> Each
+            </h2>
+            <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+                Share your unique invite link with friends, classmates, and family. When they register and start completing tasks, you both unlock reward bonuses.
+            </p>
+
+            <div class="inline-flex items-center gap-3 bg-[#1A2133] border border-gray-700 rounded-2xl px-5 py-3 shadow-inner mb-6">
+                <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Example Code:</span>
+                <span class="text-base font-black text-white tracking-widest font-outfit">BOUNTY2026</span>
+                <button onclick="navigator.clipboard.writeText('BOUNTY2026'); alert('Code copied to clipboard!');" class="text-xs font-bold text-pink-400 hover:text-pink-300 ml-2">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <div>
+                <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="btn-gradient inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-full text-base shadow-xl">
+                    <i class="fa-brands fa-google-play"></i> Get Your Invite Code Now
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. Interactive FAQ Accordion -->
+    <section class="py-20 md:py-24 px-4 sm:px-6 bg-[#0B0E17]">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black font-outfit mb-3">Frequently Asked Questions</h2>
+                <p class="text-gray-400 text-sm">Everything you need to know about GigBounty rewards and payouts.</p>
+            </div>
+
+            <div class="space-y-4">
+                
+                <details class="app-surface rounded-2xl p-5 border border-gray-800 cursor-pointer group">
+                    <summary class="font-bold text-white text-base md:text-lg flex justify-between items-center list-none">
+                        <span>Is the GigBounty app completely free?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-3 leading-relaxed">
+                        Yes, 100%! GigBounty never asks for money, deposits, or credit card details. You earn rewards purely through voluntary task participation, gameplay, and daily check-ins supported by our advertising partners.
+                    </p>
+                </details>
+
+                <details class="app-surface rounded-2xl p-5 border border-gray-800 cursor-pointer group">
+                    <summary class="font-bold text-white text-base md:text-lg flex justify-between items-center list-none">
+                        <span>How fast are UPI and Gift Card withdrawals processed?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-3 leading-relaxed">
+                        Most withdrawal requests are verified and credited within 24 hours. You can review your transaction status directly inside the app under Wallet &gt; Transactions.
+                    </p>
+                </details>
+
+                <details class="app-surface rounded-2xl p-5 border border-gray-800 cursor-pointer group">
+                    <summary class="font-bold text-white text-base md:text-lg flex justify-between items-center list-none">
+                        <span>What is the difference between Coins and Pink Diamonds?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-3 leading-relaxed">
+                        Coins are your primary withdrawal currency, redeemable for UPI cash and Gift Cards. Pink Diamonds are competitive tokens that determine your standing on the Weekly Leaderboard and can also be converted into Coins.
+                    </p>
+                </details>
+
+                <details class="app-surface rounded-2xl p-5 border border-gray-800 cursor-pointer group">
+                    <summary class="font-bold text-white text-base md:text-lg flex justify-between items-center list-none">
+                        <span>Can I use multiple accounts or VPNs?</span>
+                        <i class="fa-solid fa-chevron-down text-sm text-gray-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-gray-300 text-sm mt-3 leading-relaxed">
+                        No. To protect genuine earners and maintain policy compliance, we strictly prohibit multi-accounting, VPNs, proxies, and automated emulators. Violations result in permanent account bans.
+                    </p>
+                </details>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 9. Final Download Banner -->
+    <section class="py-16 md:py-24 px-4 sm:px-6 relative">
+        <div class="max-w-5xl mx-auto rounded-3xl p-8 md:p-14 text-center relative overflow-hidden shadow-2xl" style="background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 40%, #BE185D 100%);">
+            
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-outfit text-white mb-4">
+                Ready to Start Earning Real Rewards?
+            </h2>
+            <p class="text-purple-100 text-base md:text-lg max-w-xl mx-auto mb-8">
+                Join thousands of verified users across India. Download GigBounty today and claim your first streak bonus!
+            </p>
+
+            <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="bg-white text-gray-950 hover:bg-gray-100 px-8 py-4 rounded-full font-extrabold text-base md:text-lg inline-flex items-center gap-3 shadow-2xl transition hover:scale-105 active:scale-95">
+                <i class="fa-brands fa-google-play text-xl md:text-2xl text-emerald-600"></i>
+                <span>Download GigBounty on Google Play</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="py-12 md:py-16 border-t border-gray-800 bg-[#06080D]">
         <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center text-center">
-            <div class="flex items-center gap-2 md:gap-3 mb-5 md:mb-6">
-                <img src="logo.png" alt="GigBounty Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg opacity-80 hover:opacity-100 transition">
-                <span class="text-xl md:text-2xl font-extrabold tracking-wide text-gray-200">GigBounty</span>
+            
+            <div class="flex items-center gap-3 mb-6">
+                <img src="logo.png" alt="GigBounty Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg border border-pink-500/30" onerror="this.src='https://api.dicebear.com/7.x/identicon/svg?seed=GigBounty'">
+                <span class="text-xl md:text-2xl font-black tracking-wide text-white font-outfit">GigBounty</span>
             </div>
             
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm font-medium text-gray-400 mb-6 md:mb-8">
+            <!-- Quick Legal & Help Links -->
+            <div class="flex flex-wrap justify-center gap-6 text-xs md:text-sm font-semibold text-gray-400 mb-8">
                 <a href="privacy.html" class="hover:text-pink-400 transition">Privacy Policy</a>
                 <a href="terms.html" class="hover:text-pink-400 transition">Terms of Service</a>
                 <a href="faq.html" class="hover:text-pink-400 transition">FAQ</a>
-                <a href="mailto:support@gigbounty.online" class="hover:text-pink-400 transition">Contact Support</a>
+                <a href="mailto:support@gigbounty.online" class="hover:text-pink-400 transition">Contact Support (support@gigbounty.online)</a>
             </div>
 
-            <p class="text-[10px] md:text-xs text-gray-600 max-w-2xl mx-auto mb-4 px-2">
-                Disclaimer: The GigBounty app provides real rewards based on user task completion. Apple Inc. and Google LLC are not sponsors of, nor are they involved in any way with the rewards or promotions offered in this application. All payouts are processed securely by GigBounty.
+            <!-- Google / Apple Disclaimer -->
+            <p class="text-[11px] md:text-xs text-gray-400 max-w-3xl mx-auto mb-6 px-2 leading-relaxed">
+                <strong class="text-gray-300">Disclaimer:</strong> GigBounty provides discretionary user rewards based on skill-based and promotional tasks. Neither Google LLC nor Amazon.com, Inc. is a sponsor of, affiliated with, or responsible for any rewards, promotions, or payouts offered in this application. All payouts are processed securely by GigBounty.
             </p>
             
-            <p class="text-gray-500 text-xs md:text-sm font-semibold">© 2026 GigBounty. All rights reserved.</p>
+            <p class="text-gray-400 text-xs md:text-sm font-semibold">© 2026 GigBounty. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- Interactive Mockup & Navigation Script -->
     <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
+        // Mobile Header Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        links.forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+                mobileMenu.classList.add('hidden');
             });
         });
+
+        // App Simulator Tab Switching
+        function switchAppTab(tabName) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.app-screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+
+            // Deactivate all nav buttons
+            const navBtns = document.querySelectorAll('.app-nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Activate chosen screen and tab
+            const targetScreen = document.getElementById(`screen-${tabName}`);
+            const targetBtn = document.getElementById(`tab-btn-${tabName}`);
+
+            if (targetScreen) targetScreen.classList.add('active');
+            if (targetBtn) targetBtn.classList.add('active');
+        }
+
+        // Mockup Daily Streak Claim action
+        let streakClaimed = false;
+        function claimDailyStreakMockup() {
+            if (streakClaimed) return;
+            streakClaimed = true;
+            
+            const btn = document.getElementById('btn-claim-streak');
+            const btnText = document.getElementById('btn-claim-streak-text');
+            const coinsDisplay = document.getElementById('mockup-coins-display');
+            const inrDisplay = document.getElementById('mockup-inr-display');
+
+            btn.classList.remove('btn-gradient');
+            btn.classList.add('bg-emerald-600', 'cursor-default');
+            btnText.innerText = 'Claimed (+20)';
+
+            let currentCoins = parseInt(coinsDisplay.innerText) || 160;
+            currentCoins += 20;
+            coinsDisplay.innerText = currentCoins;
+            inrDisplay.innerText = '≈ ₹' + (currentCoins / 100).toFixed(2) + ' INR';
+
+            alert('🎉 Daily Streak claimed! +20 Coins added to balance.');
+        }
+
+        // Wallet Mockup Method Toggle (UPI vs Gift Cards)
+        function toggleWalletMockupMethod(method) {
+            const upiTab = document.getElementById('mockup-tab-upi');
+            const cardsTab = document.getElementById('mockup-tab-cards');
+            const upiContent = document.getElementById('mockup-method-upi');
+            const cardsContent = document.getElementById('mockup-method-cards');
+
+            if (method === 'upi') {
+                upiTab.className = 'flex-1 py-1.5 rounded-lg text-xs font-extrabold text-white bg-purple-600 shadow-md transition flex items-center justify-center gap-1.5';
+                cardsTab.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                upiContent.classList.remove('hidden');
+                cardsContent.classList.add('hidden');
+            } else {
+                cardsTab.className = 'flex-1 py-1.5 rounded-lg text-xs font-extrabold text-white bg-purple-600 shadow-md transition flex items-center justify-center gap-1.5';
+                upiTab.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition flex items-center justify-center gap-1.5';
+                cardsContent.classList.remove('hidden');
+                upiContent.classList.add('hidden');
+            }
+        }
+
+        // Select Withdraw Amount Chip
+        function selectWithdrawMockup(amount, coins, element) {
+            const chips = document.querySelectorAll('.withdraw-chip');
+            chips.forEach(c => {
+                c.classList.remove('border-2', 'border-pink-500');
+                c.classList.add('border', 'border-gray-700');
+            });
+            element.classList.remove('border-gray-700');
+            element.classList.add('border-2', 'border-pink-500');
+        }
+
+        // Mockup Refer Modal
+        function openReferModalMockup() {
+            alert('🎁 Refer & Earn: Share your referral code "BOUNTY2026" with friends. When they sign up, you both get 500 Coins!');
+        }
     </script>
 </body>
 </html>
