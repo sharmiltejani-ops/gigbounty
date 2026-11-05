@@ -209,24 +209,7 @@
             filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6));
         }
 
-        /* Marquee Ticker */
-        .marquee-wrapper {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            background: #0B0E17;
-            border-top: 1px solid #1F2937;
-            border-bottom: 1px solid #1F2937;
-            padding: 12px 0;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: tickerScroll 30s linear infinite;
-        }
-        @keyframes tickerScroll {
-            0% { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-        }
+
 
         /* Task Cards */
         .task-card-math { background: linear-gradient(135deg, #0284c7, #0d9488); }
@@ -686,17 +669,7 @@
                             </div>
                         </div>
 
-                        <!-- Diamonds Converter Card (Real App Feature) -->
-                        <div class="mt-3 bg-[#111623] border border-purple-500/30 rounded-xl p-3 flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-gem text-pink-400 text-base"></i>
-                                <div>
-                                    <h5 class="text-[11px] font-bold text-white">Convert Diamonds</h5>
-                                    <p class="text-[9px] text-gray-400">1000 Diamonds = 10,000 Coins</p>
-                                </div>
-                            </div>
-                            <span class="text-[10px] font-bold bg-pink-500/20 text-pink-300 px-2 py-1 rounded-md">Convert</span>
-                        </div>
+
 
                     </div>
 
@@ -799,22 +772,7 @@
         </div>
     </section>
 
-    <!-- 3. Live Payout Ticker Marquee -->
-    <div class="marquee-wrapper">
-        <div class="marquee-content flex gap-8 items-center text-xs md:text-sm font-semibold">
-            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Amit from Mumbai withdrew ₹50 via UPI</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Sneha from Surat redeemed ₹25 Google Play Code</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-pink-400 flex items-center gap-1.5"><i class="fa-solid fa-trophy"></i> Sharmil won #1 Weekly Tournament (50,000 Coins)</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Yash from Delhi withdrew ₹10 via UPI</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-amber-400 flex items-center gap-1.5"><i class="fa-solid fa-gift"></i> Priya from Pune redeemed ₹50 Amazon Gift Card</span>
-            <span class="text-gray-600">•</span>
-            <span class="text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Rohan from Ahmedabad withdrew ₹25 via UPI</span>
-        </div>
-    </div>
+
 
     <!-- 4. Play & Earn (Features / Real App Modules) -->
     <section id="how-to-earn" class="py-20 md:py-28 px-4 sm:px-6 bg-[#0B0E17] relative">
@@ -1044,19 +1002,7 @@
                         </div>
                     </div>
 
-                    <!-- Diamond Conversion Feature Box -->
-                    <div class="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-2xl p-4 mb-6 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-gem"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-sm font-bold text-white">Pink Diamond Exchange</h5>
-                                <p class="text-xs text-gray-300">1000 Diamonds ⇄ 10,000 Coins</p>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-arrows-rotate text-purple-400 text-lg"></i>
-                    </div>
+
 
                     <a href="https://play.google.com/store/apps/details?id=com.choco.gigbountyapp&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="btn-gradient w-full py-4 rounded-xl font-bold text-sm tracking-wider uppercase text-white flex items-center justify-center gap-2 shadow-lg">
                         <i class="fa-brands fa-google-play"></i> Install App to Withdraw
@@ -1241,7 +1187,7 @@
                         <i class="fa-solid fa-chevron-down text-sm text-gray-400 group-open:rotate-180 transition-transform"></i>
                     </summary>
                     <p class="text-gray-300 text-sm mt-3 leading-relaxed">
-                        Coins are your primary withdrawal currency, redeemable for UPI cash and Gift Cards. Pink Diamonds are competitive tokens that determine your standing on the Weekly Leaderboard and can also be converted into Coins.
+                        Coins are your primary withdrawal currency, redeemable for UPI cash and Gift Cards. Pink Diamonds are competitive tokens that determine your standing on the Weekly Leaderboard to win top weekly coin prizes.
                     </p>
                 </details>
 
